@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cio5l5jnc51bd"]
+
+[ext_resource type="PackedScene" uid="uid://cu4pikw5lvuhv" path="res://assets/meats/salmon_fish.glb" id="1_n7mpn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mcqld"]
+size = Vector3(3.359, 2.741, 0.915)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bqy5b"]
+height = 1.229
+radius = 0.82
+
+[node name="salmon_fish" instance=ExtResource("1_n7mpn")]
+
+[node name="Cube018" parent="Sketchfab_model/e5af0b77e1ee488c94a9e0740d42756dfbx/RootNode" index="0"]
+transform = Transform3D(0.0409572, -0.245611, -3.46552e-08, 1.35663e-08, -3.28715e-08, 0.249003, -0.245611, -0.0409572, 7.97467e-09, -9.11269, 84.9045, -90.1574)
+
+[node name="Cube018_Material010_0" parent="Sketchfab_model/e5af0b77e1ee488c94a9e0740d42756dfbx/RootNode/Cube018" index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." index="1" groups=["meat"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.7136)
+collision_mask = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("BoxShape3D_mcqld")
+
+[node name="Area3D2" type="Area3D" parent="." index="2" groups=["final_meat"]]
+collision_mask = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41465, 0)
+shape = SubResource("CylinderShape3D_bqy5b")

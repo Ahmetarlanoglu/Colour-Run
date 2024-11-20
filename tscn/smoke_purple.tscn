@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6xi286d4kj44"]
+
+[sub_resource type="Gradient" id="Gradient_qo65t"]
+offsets = PackedFloat32Array(0, 0.440789, 1)
+colors = PackedColorArray(0.478431, 0.247059, 0.811765, 1, 0.521569, 0.286275, 0.870588, 0.862745, 0.572549, 0.333333, 0.941176, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_stnxh"]
+gradient = SubResource("Gradient_qo65t")
+width = 68
+height = 303
+fill_from = Vector2(0.609351, 0.122507)
+fill_to = Vector2(0.583962, 0.319088)
+
+[sub_resource type="GDScript" id="GDScript_i5tk2"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+#func _ready():
+#	if not OS.get_name()==\"Android\":
+#		position.y-=370
+#		scale.y-=0.5
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="smoke2" type="Sprite2D"]
+position = Vector2(320, 388)
+scale = Vector2(26.511, 2.66667)
+texture = SubResource("GradientTexture2D_stnxh")
+script = SubResource("GDScript_i5tk2")

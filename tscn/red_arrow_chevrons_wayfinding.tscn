@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt5ku3gb8dej7"]
+
+[ext_resource type="PackedScene" uid="uid://cioi06juhpo48" path="res://assets/collectables/red_arrow_chevrons_wayfinding.glb" id="1_vfdwq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_78ao2"]
+albedo_color = Color(0.388235, 1, 0.298039, 1)
+
+[node name="red_arrow_chevrons_wayfinding" instance=ExtResource("1_vfdwq")]
+
+[node name="Object_2" parent="Sketchfab_model/tinker_obj_cleaner_materialmerger_gles" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_78ao2")

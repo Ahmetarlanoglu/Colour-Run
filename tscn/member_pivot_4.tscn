@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://boeeguylsy4fy"]
+
+[ext_resource type="PackedScene" uid="uid://6uxi7yduqwei" path="res://assets/tscn/cat_pack.tscn" id="1_kh05h"]
+
+[sub_resource type="GDScript" id="GDScript_u58kl"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+
+
+func trigger(body):
+	
+	if body!=$cat_pack3:
+		$cat_pack3.start_movement(body) 
+	if body!=$cat_pack4:
+		$cat_pack4.start_movement(body) 
+	if body!=$cat_pack5:
+		$cat_pack5.start_movement(body) 
+	if body!=$cat_pack6:
+		$cat_pack6.start_movement(body) 
+	if body!=$cat_pack7:
+		$cat_pack7.start_movement(body) 
+	if body!=$cat_pack8:
+		$cat_pack8.start_movement(body) 
+	if body!=$cat_pack9:
+		$cat_pack9.start_movement(body)
+	if body!=$cat_pack10:
+		$cat_pack10.start_movement(body) 
+	if body!=$cat_pack11:
+		$cat_pack11.start_movement(body) 
+"
+
+[node name="member_pivot" type="Node3D"]
+script = SubResource("GDScript_u58kl")
+
+[node name="cat_pack5" parent="." instance=ExtResource("1_kh05h")]
+
+[node name="cat_pack4" parent="." instance=ExtResource("1_kh05h")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, -0.28916, 0, 0)
+
+[node name="cat_pack3" parent="." instance=ExtResource("1_kh05h")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.297566, 0, 0)
+
+[node name="cat_pack6" parent="." instance=ExtResource("1_kh05h")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.592492, 0, 0)
+
+[node name="cat_pack10" parent="." instance=ExtResource("1_kh05h")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.88209, 0, 0)
+
+[node name="cat_pack11" parent="." instance=ExtResource("1_kh05h")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 1.18642, 0, 0)
+
+[node name="cat_pack7" parent="." instance=ExtResource("1_kh05h")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, -0.587142, 0, 0)
+
+[node name="cat_pack8" parent="." instance=ExtResource("1_kh05h")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, -0.892512, 0, 0)
+
+[node name="cat_pack9" parent="." instance=ExtResource("1_kh05h")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, -1.19046, 0, 0)

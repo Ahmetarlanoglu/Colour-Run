@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://pktle5dahg43"]
+
+[ext_resource type="PackedScene" uid="uid://thv4htmwc00a" path="res://assets/meats/finish.glb" id="1_owim0"]
+[ext_resource type="ArrayMesh" uid="uid://qts6vkay83en" path="res://assets/tres/finish.tres" id="2_knq2t"]
+
+[node name="finish" instance=ExtResource("1_owim0")]
+
+[node name="pCube32_lambert1_0" parent="Sketchfab_model/7d081e1325884dbd9d0824f516c94301fbx/RootNode/pCube32" index="0"]
+mesh = ExtResource("2_knq2t")

@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://dourtugoa3u0w"]
+
+[ext_resource type="Script" path="res://gd/main.gd" id="1_0vr8n"]
+[ext_resource type="PackedScene" uid="uid://b2vghd00r10qh" path="res://player.tscn" id="1_d58qb"]
+[ext_resource type="PackedScene" uid="uid://6uxi7yduqwei" path="res://assets/tscn/cat_pack.tscn" id="3_276je"]
+
+[sub_resource type="Animation" id="Animation_myjl6"]
+resource_name = "camera_tilt"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cameram:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.071, 5.697, -9.92), Vector3(-0.508, 4.844, -8.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cameram:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.518363, -3.1032, -0.0296706), Vector3(-0.518363, -3.05956, -0.0296706)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cameram:fov")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [53.8, 41.5]
+}
+
+[sub_resource type="Animation" id="Animation_ojya6"]
+resource_name = "fov"
+length = 100.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cameram:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.176777),
+"update": 0,
+"values": [52.57, 40.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x6yv7"]
+_data = {
+"camera_tilt": SubResource("Animation_myjl6"),
+"fov": SubResource("Animation_ojya6")
+}
+
+[node name="main" type="Node3D"]
+editor_description = "0.6 merkez"
+script = ExtResource("1_0vr8n")
+
+[node name="Cameram" type="Camera3D" parent="."]
+editor_description = "near6"
+transform = Transform3D(-0.999387, -0.0106354, -0.0333409, -0.025769, 0.868249, 0.495459, 0.0236788, 0.496014, -0.867991, 0.071, 5.697, -9.92)
+current = true
+fov = 52.57
+
+[node name="player" parent="." instance=ExtResource("1_d58qb")]
+transform = Transform3D(1.085, 0, 0, 0, 1.085, 0, 0, 0, 1.085, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x6yv7")
+}
+
+[node name="cat_pack" parent="." instance=ExtResource("3_276je")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.00573885, 0.500963, 0)
+single = true
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+current = true

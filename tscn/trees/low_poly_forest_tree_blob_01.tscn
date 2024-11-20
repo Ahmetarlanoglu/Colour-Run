@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://de41tqlhystx6"]
+
+[ext_resource type="PackedScene" uid="uid://c12fnxqyu3uoo" path="res://assets/Low_Poly_Forest_Pack_Devilswork.Shop_v02/DAE/Low_Poly_Forest_treeBlob01.dae" id="1_e1wh0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uq7n"]
+albedo_color = Color(0.572549, 0.333333, 0.941176, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wilf5"]
+albedo_color = Color(0.372549, 0.686275, 0.894118, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1p4fc"]
+material = SubResource("StandardMaterial3D_wilf5")
+
+[node name="Low_Poly_Forest_treeBlob01" instance=ExtResource("1_e1wh0")]
+
+[node name="leaf" parent="treeBlob01" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1uq7n")
+
+[node name="leaf_2" parent="treeBlob01" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1uq7n")
+
+[node name="leaf_3" parent="treeBlob01" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1uq7n")
+
+[node name="leaf_4" parent="treeBlob01" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1uq7n")
+
+[node name="bark" parent="treeBlob01" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1uq7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+visible = false
+mesh = SubResource("PlaneMesh_1p4fc")

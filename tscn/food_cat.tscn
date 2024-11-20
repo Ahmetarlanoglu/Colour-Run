@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbxo5jn337ufa"]
+
+[ext_resource type="PackedScene" uid="uid://cf873dd46vab0" path="res://assets/tscn/oreo_cookie_(1).tscn" id="1_osf7h"]
+
+[sub_resource type="GDScript" id="GDScript_asvpw"]
+script/source = "extends Area3D
+var timer=0
+
+# Called when the node enters the scene tree for the first time.
+#func _ready():
+#	var asd=$\"oreo_cookie (1)/Sketchfab_model/1add88526ecd456bb71cb015d399b7a6fbx/RootNode/group18/group19/group20\"
+#	var bsd=$\"oreo_cookie (1)/Sketchfab_model/1add88526ecd456bb71cb015d399b7a6fbx/RootNode/group18/group19/group21\"
+#	for i in asd.get_children():
+#		print(i)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	timer+=delta
+	position.y=(cos(timer)/5)-1.1
+	rotation_degrees.y=timer*100
+
+var gurad=true
+func _on_area_entered(_area):
+	if gurad:
+		gurad=false
+
+		Global.scale_upp()
+		$particles.emitting=true
+		$Timer.start()
+		$AnimationPlayer.play(\"disappear\")
+
+
+
+func _on_timer_timeout():
+	queue_free()
+"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1il0y"]
+height = 0.07
+radius = 0.18
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w1t72"]
+spread = 180.0
+gravity = Vector3(0, -1.668, 0)
+initial_velocity_max = 0.92
+angular_velocity_min = 2.34
+angular_velocity_max = 6.04
+scale_min = 0.02
+scale_max = 0.06
+collision_mode = 1
+collision_friction = 0.22
+collision_bounce = 0.18
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yd0fr"]
+albedo_color = Color(0.376471, 0.211765, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8lify"]
+material = SubResource("StandardMaterial3D_yd0fr")
+height = 0.85
+
+[sub_resource type="Animation" id="Animation_2v1th"]
+resource_name = "disappear"
+length = 0.15
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("oreo_cookie (1)")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.202, 1.206, 1.2, 0.15, 1, 0.499, 0.503, 0.5)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("oreo_cookie (1):position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.000433593, 0), Vector3(0, -0.107, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_la7m3"]
+_data = {
+"disappear": SubResource("Animation_2v1th")
+}
+
+[node name="cat_food" type="Area3D"]
+transform = Transform3D(-2.65653, 0, 1.33029, 0, 2.971, 0, -1.33029, 0, -2.65653, 0, 0, 0)
+script = SubResource("GDScript_asvpw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.999999, 5.96046e-08, 0, 0, -4.37114e-08, -0.999999, 0, 1, -4.37114e-08, 0.00373611, 0, -0.000300845)
+shape = SubResource("CylinderShape3D_1il0y")
+
+[node name="oreo_cookie (1)" parent="." instance=ExtResource("1_osf7h")]
+transform = Transform3D(1.202, 0, 0, 0, 1.206, 0, 0, 0, 1.2, 0, 0.000433593, 0)
+
+[node name="particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 5.96046e-08, 0, 0.999999, 0, -5.96046e-08, 0, 1, -0.0124317, 0.0284711, 0.0113785)
+top_level = true
+emitting = false
+amount = 11
+lifetime = 1.68
+one_shot = true
+speed_scale = 1.31
+explosiveness = 1.0
+local_coords = true
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_w1t72")
+draw_pass_1 = SubResource("SphereMesh_8lify")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_la7m3")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw6ofm08756is"]
+
+[ext_resource type="Texture2D" uid="uid://b6a0b3rqtlrv7" path="res://export/spray_White.png" id="1_vjkjt"]
+[ext_resource type="Texture2D" uid="uid://cqu74mvc61fag" path="res://assets/sprites/sprays/asdasd.png" id="2_a8rom"]
+[ext_resource type="Texture2D" uid="uid://vq0ud3a72imc" path="res://assets/sprites/sprays/pngwingwhite).png" id="3_0p52j"]
+[ext_resource type="Texture2D" uid="uid://bpssu80tdavfe" path="res://assets/sprites/sprays/Sprite-0002.png" id="4_7cd35"]
+[ext_resource type="Texture2D" uid="uid://bo1yv3lmh6yx5" path="res://assets/sprites/sprays/Sprite-0003.png" id="5_s3dja"]
+
+[node name="Node" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vjkjt")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("2_a8rom")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture = ExtResource("3_0p52j")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+texture = ExtResource("4_7cd35")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+texture = ExtResource("5_s3dja")

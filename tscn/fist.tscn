@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://mi7yi0r0vhvu"]
+
+[ext_resource type="PackedScene" uid="uid://etn5ojvh6xsl" path="res://assets/bariers/scene.gltf" id="1_s2d66"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8om5"]
+albedo_color = Color(0.176846, 0.763021, 0.268436, 1)
+
+[node name="scene" instance=ExtResource("1_s2d66")]
+transform = Transform3D(0.256, 0, 0, 0, 0.256, 0, 0, 0, 0.256, 0, 0, 0)
+
+[node name="Handobjcleanermaterialmergergles" parent="Sketchfab_model" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74082, -6.08585e-16)
+
+[node name="Object_2" parent="Sketchfab_model/Handobjcleanermaterialmergergles" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_k8om5")

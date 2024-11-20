@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8kna0k3pl8ok"]
+
+[sub_resource type="Shader" id="Shader_yaw22"]
+code = "// particles shader for Godot 4
+shader_type particles;
+
+uniform float tube_radius : hint_range( 0.0, 10.0 ) = 3.0;
+uniform float tube_length : hint_range( 0.0, 100.0 ) = 50.0;
+
+float rand_from_seed(inout uint seed) {
+	int k;
+	int s = int(seed);
+	if (s == 0)
+	s = 305420679;
+	k = s / 127773;
+	s = 16807 * (s - k * 127773) - 2836 * k;
+	if (s < 0)
+		s += 2147483647;
+	seed = uint(s);
+	return float(seed % uint(65536)) / 65535.0;
+}
+
+uint hash(uint x) {
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = (x >> uint(16)) ^ x;
+	return x;
+}
+
+void start() {
+	if (RESTART_VELOCITY) {
+		VELOCITY = (EMISSION_TRANSFORM * vec4( -tube_length / LIFETIME * 1.0, 0.0, 0.0, 0.0)).xyz;
+	}
+	if (RESTART_POSITION) {
+		uint alt_seed1 = hash(NUMBER + uint(1) + RANDOM_SEED);
+		// set particle position by tube_radius and tube_length
+		float a = rand_from_seed( alt_seed1 ) * TAU;
+		TRANSFORM = mat4(
+			vec4( 1.0,0.0,0.0,0.0 ),
+			vec4( 0.0,sin(a),-cos(a),0.0 ),
+			vec4( 0.0,-cos(a),sin(a),0.0 ),
+			vec4( tube_length, sin( a + PI ) * tube_radius, cos( a + PI ) * tube_radius, 1.0 )
+		);
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uoqne"]
+shader = SubResource("Shader_yaw22")
+shader_parameter/tube_radius = 10.0
+shader_parameter/tube_length = 50.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51mxd"]
+albedo_color = Color(0.466667, 0.780392, 0.729412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ino3d"]
+material = SubResource("StandardMaterial3D_51mxd")
+size = Vector3(8.63, 0.175, 0.185)
+
+[node name="speed_particles" type="GPUParticles3D"]
+process_material = SubResource("ShaderMaterial_uoqne")
+draw_pass_1 = SubResource("BoxMesh_ino3d")

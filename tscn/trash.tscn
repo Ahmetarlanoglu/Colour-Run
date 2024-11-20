@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://dk368empuglil"]
+
+[ext_resource type="Texture2D" uid="uid://d2j1hw8orlts2" path="res://assets/sprites/logo.png" id="1_len78"]
+[ext_resource type="Script" path="res://gd/trash.gd" id="2_capqa"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s2030"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[sub_resource type="Environment" id="Environment_3f4we"]
+volumetric_fog_enabled = true
+volumetric_fog_emission = Color(0.254902, 0, 0.388235, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ciuwo"]
+
+[sub_resource type="Sky" id="Sky_h13nc"]
+sky_material = SubResource("ProceduralSkyMaterial_ciuwo")
+
+[sub_resource type="Environment" id="Environment_pngku"]
+background_mode = 2
+sky = SubResource("Sky_h13nc")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_s2030")
+texture = ExtResource("1_len78")
+lifetime = 3.1
+one_shot = true
+script = ExtResource("2_capqa")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3f4we")
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pngku")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0320866, -0.928513, -0.369911, -0.840356, -0.175297, 0.512907, -0.541085, 0.327314, -0.774656, -37.5454, 28.0086, -57.0565)

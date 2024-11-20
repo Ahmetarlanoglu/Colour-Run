@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" uid="uid://dwbmgds45ep4o" path="res://assets/tscn/test_arena.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://1ujfoei6r514" path="res://assets/tscn/tactics_camera.tscn" id="2"]
+[ext_resource type="Script" path="res://gd/level.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://bky8ul2628kxw" path="res://assets/tscn/player_controller_ui.tscn" id="4"]
+[ext_resource type="Script" path="res://gd/player_controller.gd" id="5"]
+[ext_resource type="Script" path="res://gd/enemy_controller.gd" id="6"]
+[ext_resource type="PackedScene" uid="uid://c7hpob8wqqbcf" path="res://assets/tscn/deneme.tscn" id="7_emynn"]
+[ext_resource type="PackedScene" uid="uid://6eofg7n4asn5" path="res://assets/tscn/pawn.tscn" id="8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k3u0s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_spyty"]
+
+[node name="Level" type="Node3D"]
+script = ExtResource("3")
+
+[node name="PlayerControllerUI" parent="." instance=ExtResource("4")]
+
+[node name="TacticsCamera" parent="." instance=ExtResource("2")]
+
+[node name="Arena" parent="." instance=ExtResource("1")]
+
+[node name="Player" type="Node3D" parent="."]
+script = ExtResource("5")
+
+[node name="Pawn" parent="Player" instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.5, -3.5)
+pawn_name = "Clark"
+
+[node name="Pawn2" parent="Player" instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.5, -3.5)
+pawn_class = 1
+pawn_name = "Diana"
+
+[node name="Pawn3" parent="Player" instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2.5, -4.5)
+pawn_class = 2
+pawn_name = "Bruno"
+
+[node name="Pawn4" parent="Player" instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.5, -4.5)
+pawn_class = 3
+pawn_name = "Shiera"
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Player"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83584, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_k3u0s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CharacterBody3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020519, 0)
+mesh = SubResource("CapsuleMesh_spyty")
+skeleton = NodePath("../..")
+
+[node name="cat_rigged" parent="Player/CharacterBody3D" instance=ExtResource("7_emynn")]
+transform = Transform3D(4.61501, 0, -2.88383, 0, 6.076, 0, 3.78716, 0, 3.51421, -0.86912, 3.64971, -1.15399)
+
+[node name="Enemy" type="Node3D" parent="."]
+script = ExtResource("6")
+
+[node name="Pawn4" parent="Enemy" instance=ExtResource("8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 0.5, 3.5)
+pawn_class = 4
+pawn_name = "Victor"
+
+[node name="Pawn6" parent="Enemy" instance=ExtResource("8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 0.5, 4.5)
+pawn_class = 4
+pawn_name = "Garfield"
+
+[node name="Pawn5" parent="Enemy" instance=ExtResource("8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 0.5, 5.5)
+pawn_class = 6
+pawn_name = "Kori"
+
+[node name="Pawn7" parent="Enemy" instance=ExtResource("8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 0.5, 4.5)
+pawn_class = 5
+pawn_name = "Ricardo"

@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://co1qqfw6jcteb"]
+
+[ext_resource type="Texture2D" uid="uid://bjh6whrgoc778" path="res://assets/collectables/single_gold.png" id="1_chdiv"]
+
+[sub_resource type="GDScript" id="GDScript_powud"]
+script/source = "extends Sprite2D
+
+var hedef
+var random_speed=1.0
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	hedef=get_node(\"/root/Node3D/enviroment/CanvasLayer/Label2\").global_position-global_position
+	random_speed=randf_range(0.5,1.5)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+#	Global.debugger=(hedef-global_position)
+#	global_position = global_position.lerp(hedef, delta * 3.05)
+	hedef=get_node(\"/root/Node3D/enviroment/CanvasLayer/Label2\").global_position-global_position
+	global_position+=hedef*delta*7*random_speed
+	if abs((hedef-global_position).length())<460:
+		queue_free()
+#	if scale.x>0:
+#		scale.x-=delta/10
+#		scale.y-=delta/10
+#	else:
+#		queue_free()
+"
+
+[node name="single_gold" type="Sprite2D"]
+process_mode = 3
+modulate = Color(1.17647, 1.17647, 0.701961, 1)
+z_index = 2
+scale = Vector2(0.088, 0.088)
+skew = 0.174533
+texture = ExtResource("1_chdiv")
+region_rect = Rect2(18.3602, 426.538, 511.83, 476.306)
+script = SubResource("GDScript_powud")

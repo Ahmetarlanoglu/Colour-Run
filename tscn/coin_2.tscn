@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4yb6mt235u3n"]
+
+[ext_resource type="PackedScene" uid="uid://duiopme7cb8vl" path="res://assets/collectables/105- Coin Pack/coin.blend" id="1_sa7ry"]
+[ext_resource type="Texture2D" uid="uid://cvlyfuqhvk4d4" path="res://assets/collectables/105- Coin Pack/Tex_RGB_3.jpeg" id="2_8mxm3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_miami"]
+albedo_color = Color(1.8, 1.4, 1.4, 1)
+albedo_texture = ExtResource("2_8mxm3")
+
+[node name="coin" instance=ExtResource("1_sa7ry")]
+
+[node name="11-_Coin_Dollar_Silve" parent="." index="0"]
+transform = Transform3D(0.115, 0, 0, 0, -5.02681e-09, -0.115, 0, 0.115, -5.02681e-09, 5.53426, 0, 0)
+layers = 256
+material_override = SubResource("StandardMaterial3D_miami")

@@ -1,0 +1,142 @@
+[gd_scene load_steps=16 format=3 uid="uid://dhhmljcq0gipx"]
+
+[ext_resource type="Shader" uid="uid://dd8kk21x5gp1m" path="res://gd/direct2.tres" id="1_seyof"]
+[ext_resource type="Texture2D" uid="uid://cunqskwwogyoa" path="res://assets/bariers/textures/light.png" id="2_cngwo"]
+[ext_resource type="Texture2D" uid="uid://b2yo07fquucxf" path="res://assets/bariers/textures/light2.png" id="2_ycggg"]
+[ext_resource type="Texture2D" uid="uid://c562upencakv8" path="res://assets/Cat_v1_L3.123cb1b1943a-2f48-4e44-8f71-6bbe19a3ab64/Sprite-0006.png" id="3_clva7"]
+[ext_resource type="Script" path="res://gd/terrain.gd" id="4_gdpno"]
+[ext_resource type="Script" path="res://gd/StaticBod.gd" id="5_83sef"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c0yes"]
+size = Vector2(5, 17.025)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0n075"]
+render_priority = 0
+shader = ExtResource("1_seyof")
+shader_parameter/random_point = Vector2(0.5, 0.468)
+shader_parameter/random_point2 = Vector2(0.621, 0.5)
+shader_parameter/blood_radius = 0.107
+shader_parameter/x_scaler = 5.0
+shader_parameter/y_scaler = 2.06
+shader_parameter/maincolor = ExtResource("3_clva7")
+shader_parameter/Point = ExtResource("2_cngwo")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxu3q"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="Skin" id="Skin_w88hw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1v156"]
+render_priority = 0
+shader = ExtResource("1_seyof")
+shader_parameter/random_point = Vector2(0.5, 0.5)
+shader_parameter/random_point2 = Vector2(0.5, 0.5)
+shader_parameter/blood_radius = 0.2
+shader_parameter/x_scaler = 5.0
+shader_parameter/y_scaler = 5.0
+shader_parameter/maincolor = ExtResource("3_clva7")
+shader_parameter/Point = ExtResource("2_ycggg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndd4x"]
+render_priority = 0
+shader = ExtResource("1_seyof")
+shader_parameter/random_point = Vector2(0.5, 0.5)
+shader_parameter/random_point2 = Vector2(0.5, 0.5)
+shader_parameter/blood_radius = -0.085
+shader_parameter/x_scaler = 5.0
+shader_parameter/y_scaler = 5.0
+shader_parameter/maincolor = ExtResource("3_clva7")
+shader_parameter/Point = ExtResource("2_ycggg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlmah"]
+render_priority = 0
+shader = ExtResource("1_seyof")
+shader_parameter/random_point = Vector2(0.609, 0.627)
+shader_parameter/random_point2 = Vector2(0.5, 0.5)
+shader_parameter/blood_radius = 0.142
+shader_parameter/x_scaler = 10.0
+shader_parameter/y_scaler = 4.0
+shader_parameter/maincolor = ExtResource("3_clva7")
+shader_parameter/Point = ExtResource("2_ycggg")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uiegj"]
+material = SubResource("ShaderMaterial_rlmah")
+size = Vector2(5.043, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tnbj6"]
+albedo_texture = ExtResource("3_clva7")
+albedo_texture_force_srgb = true
+emission_enabled = true
+emission_energy_multiplier = 16.0
+
+[node name="Arena" type="Node3D"]
+
+[node name="Terrain2" type="MeshInstance3D" parent="."]
+process_priority = -20
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.184, -2.617, -14.065)
+mesh = SubResource("PlaneMesh_c0yes")
+surface_material_override/0 = SubResource("ShaderMaterial_0n075")
+script = ExtResource("4_gdpno")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain2"]
+visible = false
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("5_83sef")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.585508, 0)
+shape = SubResource("BoxShape3D_yxu3q")
+
+[node name="Terrain3" type="MeshInstance3D" parent="."]
+process_priority = -20
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.184, -2.617, 2.97031)
+mesh = SubResource("PlaneMesh_c0yes")
+skin = SubResource("Skin_w88hw")
+surface_material_override/0 = SubResource("ShaderMaterial_1v156")
+script = ExtResource("4_gdpno")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain3"]
+visible = false
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("5_83sef")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.585508, 0)
+shape = SubResource("BoxShape3D_yxu3q")
+
+[node name="Terrain4" type="MeshInstance3D" parent="."]
+process_priority = -20
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.184, -2.617, 19.9831)
+mesh = SubResource("PlaneMesh_c0yes")
+skin = SubResource("Skin_w88hw")
+surface_material_override/0 = SubResource("ShaderMaterial_ndd4x")
+script = ExtResource("4_gdpno")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain4"]
+visible = false
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("5_83sef")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.585508, 0)
+shape = SubResource("BoxShape3D_yxu3q")
+
+[node name="Terrain6" type="MeshInstance3D" parent="."]
+process_priority = -20
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.342098, 0.184, -2.609, -31.0961)
+visible = false
+mesh = SubResource("PlaneMesh_uiegj")
+skin = SubResource("Skin_w88hw")
+surface_material_override/0 = SubResource("StandardMaterial3D_tnbj6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain6"]
+visible = false
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain6/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.585508, 0)
+shape = SubResource("BoxShape3D_yxu3q")

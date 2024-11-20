@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7aspw8s18ywn"]
+
+[ext_resource type="PackedScene" uid="uid://q4e0vy13owfh" path="res://assets/tscn/coin_cat_2.tscn" id="1_5hlol"]
+
+[node name="3_gold" type="Node3D"]
+transform = Transform3D(1.485, 0, 0, 0, 1.485, 0, 0, 0, 1.485, 0, 0, 0)
+
+[node name="cat_coin" parent="." instance=ExtResource("1_5hlol")]
+transform = Transform3D(1.661, 0, 0, 0, 1.661, 0, 0, 0, 1.661, 0, 0, -1)
+
+[node name="cat_coin2" parent="." instance=ExtResource("1_5hlol")]
+transform = Transform3D(1.661, 0, 0, 0, 1.661, 0, 0, 0, 1.661, 0, 0, 1)
+
+[node name="cat_coin3" parent="." instance=ExtResource("1_5hlol")]

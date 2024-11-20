@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://dv2qx6w57keuo"]
+
+[ext_resource type="Script" path="res://export/CollisionShape.gd" id="1_bsemf"]
+[ext_resource type="ArrayMesh" uid="uid://bbuqxh0xg0puv" path="res://assets/tres/recireci.tres" id="2_0v02w"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_03xgy"]
+rough = true
+
+[sub_resource type="GDScript" id="GDScript_g2mse"]
+script/source = "extends StaticBody3D
+@export var color:Color
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wu88i"]
+size = Vector3(0.202, 1.094, 0.745)
+
+[sub_resource type="Animation" id="Animation_mr41w"]
+resource_name = "swing"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 2, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6mo1"]
+_data = {
+"swing": SubResource("Animation_mr41w")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bo7si"]
+size = Vector3(2.997, 0.963, 1.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4lxhj"]
+albedo_color = Color(0.368627, 0.0156863, 0.478431, 1)
+
+[node name="box_barier" type="StaticBody3D" groups=["barierr"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+collision_layer = 0
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_03xgy")
+script = SubResource("GDScript_g2mse")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.934, 0, 0, 0, 0.934, 0, 0, 0, 0.934, 0, 0.396214, 0)
+shape = SubResource("BoxShape3D_wu88i")
+script = ExtResource("1_bsemf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g6mo1")
+}
+
+[node name="Area3D" type="Area3D" parent="." groups=["barier"]]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.934, 0, 0, 0, 0.934, 0, 0, 0, 0.934, -0.00961659, 0.241227, 0.000533365)
+shape = SubResource("BoxShape3D_bo7si")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+editor_description = "7d01ef
+"
+transform = Transform3D(1.419, 0, 0, 0, 0.433, 0, 0, 0, 0.473, 0, 0.266681, 0)
+mesh = ExtResource("2_0v02w")
+surface_material_override/0 = SubResource("StandardMaterial3D_4lxhj")

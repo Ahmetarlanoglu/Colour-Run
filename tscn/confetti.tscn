@@ -1,0 +1,281 @@
+[gd_scene load_steps=5 format=3 uid="uid://ce6jrr4b5ti52"]
+
+[ext_resource type="PackedScene" uid="uid://do75pji0mccit" path="res://assets/meats/confetti.glb" id="1_8j31k"]
+[ext_resource type="Material" uid="uid://b85y6u14mcldx" path="res://assets/confetimaterial.tres" id="2_iagnh"]
+[ext_resource type="Material" uid="uid://bkripbbcgux1r" path="res://assets/confetimaterial2.tres" id="3_c7c82"]
+
+[sub_resource type="GDScript" id="GDScript_r1mfb"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	for i in $Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner.get_children():
+		var my_random_color=Color(randf_range(0,1),randf_range(0,1),randf_range(0,1),1)
+		
+#		i.get_child(0).mesh.surface_find_by_name(\"surface_0\").material.set_albedo(my_random_color)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_animation_player_animation_finished(anim_name):
+	queue_free()
+"
+
+[node name="confetti" instance=ExtResource("1_8j31k")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+script = SubResource("GDScript_r1mfb")
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, 0.1, 0, -0.1, -4.37114e-09, 0, 0, 0)
+
+[node name="Plane_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_0_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_0" index="0"]
+surface_material_override/0 = ExtResource("2_iagnh")
+
+[node name="Plane_1" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_2" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_3" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_3_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_3" index="0"]
+surface_material_override/0 = ExtResource("2_iagnh")
+
+[node name="Plane_4" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="4"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_5" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="5"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_6" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="6"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_7" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="7"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_8" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="8"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_8_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_8" index="0"]
+surface_material_override/0 = ExtResource("2_iagnh")
+
+[node name="Plane_9" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="9"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_9_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_9" index="0"]
+surface_material_override/0 = ExtResource("3_c7c82")
+
+[node name="Plane_10" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="10"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_11" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="11"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_12" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="12"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_13" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="13"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_14" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="14"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_15" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="15"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_16" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="16"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_16_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_16" index="0"]
+surface_material_override/0 = ExtResource("3_c7c82")
+
+[node name="Plane_17" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="17"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_18" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="18"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_19" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="19"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_20" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="20"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_20_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_20" index="0"]
+surface_material_override/0 = ExtResource("3_c7c82")
+
+[node name="Plane_21" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="21"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_21_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_21" index="0"]
+surface_material_override/0 = ExtResource("2_iagnh")
+
+[node name="Plane_22" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="22"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_23" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="23"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_24" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="24"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_25" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="25"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_26" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="26"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_26_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_26" index="0"]
+surface_material_override/0 = ExtResource("3_c7c82")
+
+[node name="Plane_27" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="27"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_28" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="28"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_28_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_28" index="0"]
+surface_material_override/0 = ExtResource("2_iagnh")
+
+[node name="Plane_29" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="29"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_30" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="30"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_31" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="31"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_32" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="32"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_33" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="33"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_34" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="34"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_34_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_34" index="0"]
+surface_material_override/0 = ExtResource("3_c7c82")
+
+[node name="Plane_35" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="35"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_36" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="36"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_37" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="37"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_37_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_37" index="0"]
+surface_material_override/0 = ExtResource("2_iagnh")
+
+[node name="Plane_38" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="38"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_39" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="39"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_40" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="40"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638158, 0.769906, 0, 0, 0)
+
+[node name="Plane_41" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="41"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_42" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="42"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_42_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_42" index="0"]
+surface_material_override/0 = ExtResource("3_c7c82")
+
+[node name="Plane_43" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="43"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_44" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="44"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_45" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="45"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_46" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="46"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_47" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="47"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_47_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_47" index="0"]
+surface_material_override/0 = ExtResource("2_iagnh")
+
+[node name="Plane_48" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="48"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_49" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="49"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_50" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="50"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_51" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="51"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_52" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="52"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638158, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_52_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_52" index="0"]
+surface_material_override/0 = ExtResource("3_c7c82")
+
+[node name="Plane_53" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="53"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_54" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="54"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_55" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="55"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638158, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_56" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="56"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_57" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="57"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_58" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="58"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_59" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="59"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_60" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="60"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_61" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="61"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638158, 0.769906, 0, 0, 0)
+
+[node name="Plane_61_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_61" index="0"]
+surface_material_override/0 = ExtResource("3_c7c82")
+
+[node name="Plane_62" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="62"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_62_Mat1_0" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner/Plane_62" index="0"]
+surface_material_override/0 = ExtResource("3_c7c82")
+
+[node name="Plane_63" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="63"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_64" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="64"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[node name="Plane_65" parent="Sketchfab_model/bb72ba8bbfb44c1699d0d806248193fafbx/Object_2/RootNode/Cloner" index="65"]
+transform = Transform3D(1, 0, 0, 0, 0.769906, -0.638157, 0, 0.638157, 0.769906, 0, 0, 0)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

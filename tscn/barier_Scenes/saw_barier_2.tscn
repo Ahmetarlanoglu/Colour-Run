@@ -1,0 +1,108 @@
+[gd_scene load_steps=12 format=3 uid="uid://mtvgdgle8hc4"]
+
+[ext_resource type="Script" path="res://export/CollisionShape.gd" id="1_r7aan"]
+[ext_resource type="ArrayMesh" uid="uid://c2qkam4rorabg" path="res://assets/bariers/model.obj" id="2_l6di1"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_03xgy"]
+rough = true
+
+[sub_resource type="GDScript" id="GDScript_3ctqq"]
+script/source = "extends StaticBody3D
+var time=0
+@export var color:Color
+@export var speed=1.0
+@export var circle_diameter=1.0
+@export var offsett=0.0
+var positon_passer
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	positon_passer=position.z
+	$MeshInstance3D.get_surface_override_material(0).set_albedo(color) 
+	$MeshInstance3D2.get_surface_override_material(0).set_albedo(color)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	time+=delta*speed
+	position.x=cos(time)*circle_diameter+0.5+offsett
+	position.z=sin(time)*circle_diameter+positon_passer
+	rotate_y(delta*speed*1.5)
+
+func set_color(colour):
+	$MeshInstance3D.get_surface_override_material(0).set_albedo(colour) 
+	$MeshInstance3D2.get_surface_override_material(0).set_albedo(colour)
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wu88i"]
+size = Vector3(0.202, 1.094, 0.745)
+
+[sub_resource type="Animation" id="Animation_mr41w"]
+resource_name = "swing"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 2, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6mo1"]
+_data = {
+"swing": SubResource("Animation_mr41w")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fmu8g"]
+size = Vector3(0.105, 0.76, 0.641)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kglq5"]
+albedo_color = Color(0.490196, 0.00392157, 0.937255, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32qui"]
+albedo_color = Color(1, 0.878431, 0.141176, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rplpg"]
+material = SubResource("StandardMaterial3D_32qui")
+height = 0.279
+
+[node name="saw_barier_2" type="StaticBody3D" groups=["barierr"]]
+process_mode = 3
+transform = Transform3D(0.00243457, -0.464956, -1.44819, -1.52098, -0.00796403, 0, -0.00758279, 1.44817, -0.464963, 0, 0, 0)
+collision_layer = 0
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_03xgy")
+script = SubResource("GDScript_3ctqq")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.934, 0, 0, 0, 0.934, 0, 0, 0, 0.934, 0, 1.63444, 0)
+visible = false
+shape = SubResource("BoxShape3D_wu88i")
+script = ExtResource("1_r7aan")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g6mo1")
+}
+
+[node name="Area3D" type="Area3D" parent="." groups=["barier"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.266098, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.934, 4.0826e-08, -4.06469e-08, -4.0826e-08, 0.00410789, -0.933991, -4.06469e-08, 0.933991, 0.00410789, 0.00289022, 0.266516, 0.000533364)
+shape = SubResource("BoxShape3D_fmu8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+editor_description = "7d01ef
+"
+transform = Transform3D(-7.85388e-05, 0, -0.0149994, 0, 0.009, 0, 0.00899966, 0, -0.000130898, 0, 0.000583369, 0)
+mesh = ExtResource("2_l6di1")
+surface_material_override/0 = SubResource("StandardMaterial3D_kglq5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-7.74043e-09, -1.26167, 1.77636e-15, 0.17708, -5.51494e-08, 0, 1.05879e-22, 4.26326e-14, 0.18881, 0.000693604, -0.000313708, -3.03184e-11)
+mesh = SubResource("CylinderMesh_rplpg")
+surface_material_override/0 = SubResource("StandardMaterial3D_kglq5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.69439e-08, -0.34661, 3.55271e-15, 0.38763, -1.51508e-08, 0, 2.11758e-22, 1.42109e-14, 0.407678, -0.0129762, -0.00289525, 5.67207e-10)
+mesh = SubResource("CylinderMesh_rplpg")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu8wamskid603"]
+
+[ext_resource type="PackedScene" uid="uid://db4vpmjm0o53l" path="res://assets/Low_Poly_Forest_Pack_Devilswork.Shop_v02/DAE/Low_Poly_Forest_tree04.dae" id="1_7ou2a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkj75"]
+albedo_color = Color(0.572549, 0.333333, 0.941176, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwegh"]
+albedo_color = Color(0.372549, 0.686275, 0.894118, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mvpv6"]
+material = SubResource("StandardMaterial3D_pwegh")
+
+[node name="Low_Poly_Forest_tree04" instance=ExtResource("1_7ou2a")]
+
+[node name="bark" parent="tree04" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_pkj75")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+visible = false
+layers = 256
+mesh = SubResource("PlaneMesh_mvpv6")

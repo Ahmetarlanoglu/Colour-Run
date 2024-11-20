@@ -1,0 +1,440 @@
+[gd_scene load_steps=42 format=3 uid="uid://cpififrvsdmv1"]
+
+[ext_resource type="PackedScene" uid="uid://dourtugoa3u0w" path="res://assets/tscn/main.tscn" id="1_jxclr"]
+[ext_resource type="PackedScene" uid="uid://boeeguylsy4fy" path="res://assets/tscn/member_pivot_4.tscn" id="3_4ig3e"]
+[ext_resource type="PackedScene" uid="uid://0b86bg4d24no" path="res://assets/tscn/barier_Scenes/axe_barier.tscn" id="3_6jvjw"]
+[ext_resource type="PackedScene" uid="uid://6uxi7yduqwei" path="res://assets/tscn/cat_pack.tscn" id="3_nf35s"]
+[ext_resource type="PackedScene" uid="uid://ctckmw64bjtp7" path="res://assets/tscn/barier_Scenes/cube_barier_4.tscn" id="4_fwtox"]
+[ext_resource type="PackedScene" uid="uid://mk1q054v0c3q" path="res://assets/tscn/barier_Scenes/silindir_barier.tscn" id="5_rojr5"]
+[ext_resource type="PackedScene" uid="uid://q4e0vy13owfh" path="res://assets/tscn/coin_cat_2.tscn" id="6_pp8s4"]
+[ext_resource type="PackedScene" uid="uid://ci8dy6w37fj6p" path="res://export/gate.tscn" id="6_v6k2f"]
+[ext_resource type="PackedScene" uid="uid://swdm625dnnqx" path="res://export/test_arena_2.tscn" id="7_36s8w"]
+[ext_resource type="PackedScene" uid="uid://j6xpeh35eom5" path="res://assets/tscn/power_up.tscn" id="7_qwq0i"]
+[ext_resource type="PackedScene" uid="uid://dkbhfmve4bg54" path="res://assets/tscn/wall.tscn" id="8_mk4ll"]
+[ext_resource type="PackedScene" uid="uid://i1gfil8eth4o" path="res://assets/tscn/meat.tscn" id="9_1qpy6"]
+[ext_resource type="PackedScene" uid="uid://cs55yc5r84e8v" path="res://assets/tscn/confeeti.tscn" id="10_yomsm"]
+[ext_resource type="PackedScene" uid="uid://bpt5ienk685i4" path="res://assets/tscn/finish_flag.tscn" id="11_1xqer"]
+[ext_resource type="Texture2D" uid="uid://s8kfv1mt5pra" path="res://assets/collectables/PNG/Gold/Gold_11.png" id="15_lc0ps"]
+[ext_resource type="Texture2D" uid="uid://cla0ovd8l382g" path="res://assets/collectables/PNG/Gold/Gold_12.png" id="16_qlnyc"]
+[ext_resource type="Texture2D" uid="uid://cvpjii2pqyx8u" path="res://assets/collectables/PNG/Gold/Gold_13.png" id="17_w2wlu"]
+[ext_resource type="Texture2D" uid="uid://cxa0m1sv6qvpc" path="res://assets/collectables/PNG/Gold/Gold_14.png" id="18_8yj14"]
+[ext_resource type="Texture2D" uid="uid://bwtoa11ijo71j" path="res://assets/collectables/PNG/Gold/Gold_15.png" id="19_kmcr6"]
+[ext_resource type="PackedScene" uid="uid://dpcvx5frmsxuw" path="res://assets/tscn/ui.tscn" id="20_amdla"]
+[ext_resource type="Texture2D" uid="uid://c8r0huugcsfyo" path="res://assets/collectables/PNG/Gold/Gold_16.png" id="20_g5esc"]
+[ext_resource type="Texture2D" uid="uid://ygnkmymwdrr0" path="res://assets/collectables/PNG/Gold/Gold_17.png" id="21_yisiw"]
+[ext_resource type="Texture2D" uid="uid://1voaijb2h1xv" path="res://assets/collectables/PNG/Gold/Gold_18.png" id="22_pjw0a"]
+[ext_resource type="Texture2D" uid="uid://7ruudtt6sfvr" path="res://assets/collectables/PNG/Gold/Gold_19.png" id="23_bpvqh"]
+[ext_resource type="Texture2D" uid="uid://ct0qyfwwx2d7e" path="res://assets/collectables/PNG/Gold/Gold_20.png" id="24_wljks"]
+[ext_resource type="Texture2D" uid="uid://deash0vdu8qg7" path="res://export/420_pixel.png" id="25_ub3fq"]
+[ext_resource type="PackedScene" uid="uid://drj4gyxnkx6et" path="res://assets/tscn/barier_Scenes/cube_barier.tscn" id="27_57gf6"]
+[ext_resource type="PackedScene" uid="uid://nukg28vnhn02" path="res://assets/tscn/barier_Scenes/cube_barier_2.tscn" id="28_51gv4"]
+[ext_resource type="PackedScene" uid="uid://bovkiegsvqcmd" path="res://assets/tscn/barier_Scenes/cube_barier_3.tscn" id="29_tpdvm"]
+[ext_resource type="PackedScene" uid="uid://c6xi286d4kj44" path="res://assets/tscn/smoke_purple.tscn" id="30_6wnau"]
+[ext_resource type="PackedScene" uid="uid://dv2qx6w57keuo" path="res://assets/tscn/barier_Scenes/rectan.tscn" id="30_yb2pw"]
+[ext_resource type="PackedScene" uid="uid://dnym6pxhou72w" path="res://assets/tscn/barier_Scenes/rectangle.tscn" id="32_flms1"]
+[ext_resource type="PackedScene" uid="uid://bsxcm0tnffphx" path="res://purple_trees.tscn" id="32_llieq"]
+
+[sub_resource type="GDScript" id="GDScript_huec3"]
+script/source = "extends Node3D
+var speed
+
+@export var background_color:Color
+@export var light_color:Color
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$enviroment/backgorund_bottom.modulate=background_color
+	var scaler=DisplayServer.window_get_size(0).y/960
+	$enviroment/CanvasLayer/smoke.scale.y*=scaler
+	$enviroment/CanvasLayer/smoke.position.y+=(scaler-1)*250
+	var smoke_color=background_color-Color(0.1,0.1,0.1,0)
+	$enviroment/CanvasLayer/smoke.texture.gradient.set_color(0,smoke_color)
+#	$enviroment/CanvasLayer/smoke.texture.gradient.set_color(0,background_color)
+	RenderingServer.set_default_clear_color(light_color)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	$enviroment/CanvasLayer/Label.text=str(Global.debugger)
+	Global.debugger=1/delta
+#	if Input.is_action_just_pressed(\"ui_up\"):
+#		print(Global.member_dict)
+	Global.debugger=1/delta
+#	$finish/salmon_fish/Sketchfab_model/e5af0b77e1ee488c94a9e0740d42756dfbx/RootNode/Cube018/Cube018_Material010_0.rotate_y(delta)
+
+func _on_area_3d_area_entered(_area):
+	pass # Replace with function body.
+
+func _on_area_3d_body_entered(body):
+	body.global_position.x+=1
+	body.global_position.y+=1
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jl66"]
+albedo_color = Color(0.882353, 0.882353, 0.882353, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v1ql8"]
+material = SubResource("StandardMaterial3D_6jl66")
+size = Vector3(0.273, 0.772, 4.935)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vadeq"]
+albedo_color = Color(0.227451, 0.227451, 0.227451, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_buv62"]
+material = SubResource("StandardMaterial3D_vadeq")
+radius = 0.11
+height = 5.567
+
+[sub_resource type="Gradient" id="Gradient_jwnw0"]
+offsets = PackedFloat32Array(0, 0.649351)
+colors = PackedColorArray(0.466667, 0.741176, 0.729412, 1, 0.466667, 0.741176, 0.729412, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sl73k"]
+gradient = SubResource("Gradient_jwnw0")
+width = 269
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q458s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_lc0ps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_qlnyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_w2wlu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_8yj14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_kmcr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_g5esc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_yisiw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_pjw0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_bpvqh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_wljks")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_huec3")
+background_color = Color(0.572549, 0.333333, 0.941176, 1)
+light_color = Color(0.839216, 0.796078, 0.835294, 1)
+
+[node name="main" parent="." instance=ExtResource("1_jxclr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.753136, -1.71744, -29.6616)
+
+[node name="members" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.9578)
+
+[node name="member_pivot3" parent="members" instance=ExtResource("3_4ig3e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.642265, 0, 0)
+
+[node name="member_pivot4" parent="members" instance=ExtResource("3_4ig3e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.642265, -1.35016, -43.2861)
+
+[node name="cat_pack9" parent="members" instance=ExtResource("3_nf35s")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.942424, -0.825626, 21.505)
+single = true
+
+[node name="cat_pack10" parent="members" instance=ExtResource("3_nf35s")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 1.61319, -0.825626, 10.5797)
+single = true
+
+[node name="bariers" type="Node3D" parent="."]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.06348)
+
+[node name="axe_barier" parent="bariers" instance=ExtResource("3_6jvjw")]
+transform = Transform3D(-2.57897e-08, 0, -0.59, 0, 0.59, 0, 0.59, 0, -2.57897e-08, 0.93103, 0.504816, -2.70508)
+
+[node name="axe_barier2" parent="bariers" instance=ExtResource("3_6jvjw")]
+transform = Transform3D(-2.57897e-08, 0, -0.59, 0, 0.59, 0, 0.59, 0, -2.57897e-08, 0.93103, 0.504816, 1.42231)
+
+[node name="box_barier2" parent="bariers" instance=ExtResource("4_fwtox")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.00878, -1.65718, 29.7376)
+turn_y = true
+diameter = 3.0
+randi = 3
+
+[node name="silindir_barier" parent="bariers" instance=ExtResource("5_rojr5")]
+transform = Transform3D(1.521, 0, 0, 0, 1.521, 0, 0, 0, 1.521, 0.949417, -1.721, 39.4404)
+color = Color(0.807843, 0.309804, 0.698039, 1)
+
+[node name="box_barier" parent="bariers" instance=ExtResource("27_57gf6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.97976, -1.70747, 25.5107)
+color = Color(0.733, 0.106, 0.396, 1)
+
+[node name="box_barier3" parent="bariers" instance=ExtResource("27_57gf6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.926118, -1.70747, 25.5107)
+color = Color(0.733333, 0.105882, 0.396078, 1)
+
+[node name="box_barier4" parent="bariers" instance=ExtResource("27_57gf6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.120544, -1.70747, 25.5107)
+color = Color(0.733, 0.106, 0.396, 1)
+
+[node name="box_barier9" parent="bariers" instance=ExtResource("27_57gf6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.120544, -1.70747, 48.71)
+color = Color(0.733, 0.106, 0.396, 1)
+
+[node name="box_barier10" parent="bariers" instance=ExtResource("27_57gf6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.09992, -1.70747, 48.71)
+color = Color(0.733, 0.106, 0.396, 1)
+
+[node name="box_barier_2" parent="bariers" instance=ExtResource("28_51gv4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.96047, -1.70271, 46.2268)
+
+[node name="box_barier_3" parent="bariers" instance=ExtResource("29_tpdvm")]
+transform = Transform3D(-4.37114e-08, 0, -0.582948, 0, 1, 0, 1, 0, -2.54815e-08, -0.185427, -1.89511, 43.4907)
+color = Color(0.572549, 0.333333, 0.941176, 1)
+
+[node name="box_barier_7" parent="bariers" instance=ExtResource("29_tpdvm")]
+transform = Transform3D(-4.37114e-08, 0, -0.582948, 0, 1, 0, 1, 0, -2.54815e-08, 2.13884, -1.89511, 35.6709)
+color = Color(0.572549, 0.333333, 0.941176, 1)
+
+[node name="box_barier5" parent="bariers" instance=ExtResource("30_yb2pw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.121404, -1.66827, -19.3815)
+
+[node name="box_barier6" parent="bariers" instance=ExtResource("30_yb2pw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0492, -1.66827, -14.8633)
+
+[node name="box_barier7" parent="bariers" instance=ExtResource("30_yb2pw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.121404, -1.66827, 5.17195)
+
+[node name="box_barier8" parent="bariers" instance=ExtResource("30_yb2pw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0492, -1.66827, 9.69016)
+
+[node name="rectangle" parent="bariers" instance=ExtResource("32_flms1")]
+transform = Transform3D(1.14198, 0, -1.14198, 0, 1.615, 0, 1.14198, 0, 1.14198, 3.55132, -1.50141, -6.46503)
+
+[node name="rectangle2" parent="bariers" instance=ExtResource("32_flms1")]
+transform = Transform3D(-1.14198, 0, 1.14198, 0, 1.615, 0, -1.14198, 0, -1.14198, -1.51543, -1.50141, -11.0642)
+
+[node name="collectables" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.06348)
+
+[node name="cat_coin6" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 2.36983, -1.44917, -11.8201)
+
+[node name="cat_coin11" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 1.36983, -1.44917, -12.8201)
+
+[node name="cat_coin12" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 0.369827, -1.44917, -13.8201)
+
+[node name="cat_coin13" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, -0.630173, -1.44917, -14.8201)
+
+[node name="cat_coin14" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, -0.630173, -1.44917, -15.8201)
+
+[node name="cat_coin17" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, -1.15193, -1.44917, 28.716)
+
+[node name="cat_coin23" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, -1.15193, -1.44917, 27.6455)
+
+[node name="cat_coin18" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, -1.15193, -1.44917, 29.8732)
+
+[node name="cat_coin27" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, -1.15193, -1.44917, 30.9146)
+
+[node name="cat_coin28" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, -1.15193, -1.44917, 31.9611)
+
+[node name="cat_coin19" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 2.8867, -1.44917, 42.3924)
+
+[node name="cat_coin24" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 2.8867, -1.44917, 41.4039)
+
+[node name="cat_coin25" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 2.8867, -1.44917, 40.5198)
+
+[node name="cat_coin26" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 2.8867, -1.44917, 39.5641)
+
+[node name="cat_coin20" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 2.8867, -1.44917, 43.5496)
+
+[node name="cat_coin21" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 0.741081, -1.44917, 50.3673)
+
+[node name="cat_coin22" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 0.741081, -1.44917, 51.5245)
+
+[node name="cat_coin15" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 0.163866, -1.44917, -16.5464)
+
+[node name="cat_coin16" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 0.822182, -1.44917, -17.3235)
+
+[node name="cat_coin10" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 2.36983, -1.44917, -10.8201)
+
+[node name="cat_coin" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 2.12461, -1.44917, -19.2463)
+
+[node name="cat_coin2" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 1.71948, -1.44917, -18.0154)
+
+[node name="cat_coin5" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 2.01697, -1.44917, -9.9331)
+
+[node name="cat_coin7" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 1.34428, -1.44917, -8.9331)
+
+[node name="cat_coin8" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 0.729572, -1.44917, -7.9331)
+
+[node name="cat_coin9" parent="collectables" instance=ExtResource("6_pp8s4")]
+transform = Transform3D(1.941, 0, 0, 0, 1.941, 0, 0, 0, 1.941, 0.139586, -1.44917, -6.9331)
+
+[node name="gates" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.5984)
+
+[node name="Gate5" parent="gates" instance=ExtResource("6_v6k2f")]
+transform = Transform3D(-2.181, 0, 1.90669e-07, 0, 2.181, 0, -1.90669e-07, 0, -2.181, -0.27424, -0.72394, -31.1328)
+color = Color(0.313726, 0.705882, 0.94902, 1)
+color_name = "Blue"
+not_default = true
+
+[node name="Gate6" parent="gates" instance=ExtResource("6_v6k2f")]
+transform = Transform3D(-2.181, 0, 1.90669e-07, 0, 2.181, 0, -1.90669e-07, 0, -2.181, 2.15508, -0.72394, -31.1328)
+color = Color(0.807843, 0.309804, 0.698039, 1)
+color_name = "Pink"
+not_default = true
+
+[node name="power_up" parent="gates" instance=ExtResource("7_qwq0i")]
+transform = Transform3D(4.941, 0, 0, 0, 4.941, 0, 0, 0, 4.941, 1.09576, -1.14807, 16.1012)
+
+[node name="Arena" parent="." instance=ExtResource("7_36s8w")]
+transform = Transform3D(1.048, 0, 0, 0, 1, 0, 0, 0, 1.25, 0.8, 0.00281699, 25.398)
+purple = true
+arena_color = Color(0.8, 0.8, 1.1, 1)
+
+[node name="Arena2" parent="." instance=ExtResource("7_36s8w")]
+transform = Transform3D(1.048, 0, 0, 0, 1, 0, 0, 0, 1.25, 0.8, 0.0698527, -39.9026)
+
+[node name="finish" type="Node3D" parent="."]
+editor_description = "kudurtmal yapalim kolay kolay ete ulasilmasin
+"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512201, -0.160742, 75.3651)
+
+[node name="wall" parent="finish" instance=ExtResource("8_mk4ll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -10.9511)
+
+[node name="wall2" parent="finish" instance=ExtResource("8_mk4ll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -9.53826)
+
+[node name="wall3" parent="finish" instance=ExtResource("8_mk4ll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -12.1816)
+
+[node name="meat" parent="finish" instance=ExtResource("9_1qpy6")]
+transform = Transform3D(-0.00454646, 0, -1.49699, 0, 1.497, 0, 1.49699, 0, -0.00454646, 0.434523, -1.26983, -5.82124)
+
+[node name="side_right5" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(-4.37114e-08, 0, 1.17101, 0, 1, 0, -1, 0, -5.11865e-08, 0.447132, -1.7418, -4.99996)
+mesh = SubResource("BoxMesh_v1ql8")
+
+[node name="Area3D" parent="finish" instance=ExtResource("10_yomsm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.381615, -0.674872, -14.5324)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1.16223, 0.413118, -1.74578, -14.8669)
+visible = false
+mesh = SubResource("CapsuleMesh_buv62")
+
+[node name="CSGCombiner3D" parent="finish" instance=ExtResource("11_1xqer")]
+transform = Transform3D(0.0750657, 0, 0, 0, 0.0598995, 0, 0, 0, 0.085, 0.414204, -1.75247, -14.9784)
+
+[node name="enviroment" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="enviroment"]
+layer = -5
+follow_viewport_enabled = true
+
+[node name="ui" parent="enviroment/CanvasLayer" instance=ExtResource("20_amdla")]
+
+[node name="Label" type="Label" parent="enviroment/CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+anchors_preset = -1
+anchor_top = 0.344
+anchor_right = 0.813
+anchor_bottom = 0.562
+offset_left = 63.0
+offset_top = 258.76
+offset_right = -173.02
+offset_bottom = 116.48
+scale = Vector2(1.717, 1.717)
+text = "asdasd"
+
+[node name="smoke" type="Sprite2D" parent="enviroment/CanvasLayer"]
+visible = false
+position = Vector2(320, 184.26)
+scale = Vector2(40.134, 8.763)
+texture = SubResource("GradientTexture2D_sl73k")
+
+[node name="gold" type="AnimatedSprite2D" parent="enviroment/CanvasLayer"]
+visible = false
+modulate = Color(0.819608, 0.866667, 0.247059, 1)
+position = Vector2(515, 26)
+scale = Vector2(0.095, 0.095)
+sprite_frames = SubResource("SpriteFrames_q458s")
+autoplay = "default"
+speed_scale = 2.045
+
+[node name="smoke2" parent="enviroment/CanvasLayer" instance=ExtResource("30_6wnau")]
+
+[node name="Label2" type="Label" parent="enviroment/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+
+[node name="backgorund_bottom" type="Sprite3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, 0.174962, -1.05742, 0, 1.56179, 0.118459, 0, -5.01441, 49.6213)
+layers = 64
+pixel_size = 0.3352
+texture = ExtResource("25_ub3fq")
+
+[node name="Sprite3D3" type="Sprite3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.20204, 131.374)
+visible = false
+layers = 64
+gi_mode = 0
+modulate = Color(0.466667, 0.741176, 0.729412, 1)
+pixel_size = 0.3352
+texture = ExtResource("25_ub3fq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, -0.165048, 0.986286, 0, -0.986286, -0.165048, 0.313584, 4.53873, -5.08536)
+light_cull_mask = 4294966273
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="trees" parent="enviroment" instance=ExtResource("32_llieq")]
+
+[node name="trees2" parent="enviroment" instance=ExtResource("32_llieq")]
+transform = Transform3D(0.501, 0, 0, 0, 0.501, 0, 0, 0, 0.501, 0, 0, -34.2724)

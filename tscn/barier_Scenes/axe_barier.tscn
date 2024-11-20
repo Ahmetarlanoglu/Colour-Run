@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://0b86bg4d24no"]
+
+[ext_resource type="Script" path="res://gd/silindir_barier.gd" id="1_pr4lr"]
+[ext_resource type="Script" path="res://export/CollisionShape.gd" id="2_ntw45"]
+[ext_resource type="ArrayMesh" uid="uid://4hfmliotqmwh" path="res://assets/tres/axe_open.tres" id="3_6udsh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_03xgy"]
+rough = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wu88i"]
+size = Vector3(0.202, 1.094, 0.745)
+
+[sub_resource type="Animation" id="Animation_mr41w"]
+resource_name = "swing"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 2, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6mo1"]
+_data = {
+"swing": SubResource("Animation_mr41w")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v72al"]
+size = Vector3(0.736, 1.205, 1.198)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f6wx4"]
+albedo_color = Color(0.490196, 0.00392157, 0.937255, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_724jf"]
+material = SubResource("StandardMaterial3D_f6wx4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1adtb"]
+albedo_color = Color(0.2, 0, 0.517647, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wfmfw"]
+material = SubResource("StandardMaterial3D_1adtb")
+
+[node name="axe_barier" type="StaticBody3D" groups=["barierr"]]
+process_mode = 3
+transform = Transform3D(-2.57897e-08, 0, -0.59, 0, 0.59, 0, 0.59, 0, -2.57897e-08, 0, 0, 0)
+collision_layer = 0
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_03xgy")
+script = ExtResource("1_pr4lr")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.934, 0, 0, 0, 0.934, 0, 0, 0, 0.934, 0, 0.396214, 0)
+shape = SubResource("BoxShape3D_wu88i")
+script = ExtResource("2_ntw45")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g6mo1")
+}
+
+[node name="Area3D" type="Area3D" parent="." groups=["barier"]]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.934, 4.0826e-08, -4.06469e-08, -4.0826e-08, 0.00410789, -0.933991, -4.06469e-08, 0.933991, 0.00410789, 0.00289022, -3.04202, 0.0368868)
+shape = SubResource("BoxShape3D_v72al")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.29512e-08, -0.160543, -2.4869e-14, 0.982609, -7.01755e-09, 0, -2.32934e-21, -2.66454e-15, 1.30189, -1.85262e-08, -3.10354, -0.540237)
+mesh = ExtResource("3_6udsh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.29512e-08, -0.160543, 1.13814e-07, -0.982609, -7.01755e-09, 0, 3.75491e-15, -1.40351e-08, -1.30189, 1.73965e-08, -3.10354, 0.584915)
+mesh = ExtResource("3_6udsh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.42625, 0, -1.06581e-14, 0, 0.356047, 0, -8.88178e-15, 0, 0.471035, 2.22045e-16, -3.15768, 0.0434164)
+mesh = SubResource("CylinderMesh_724jf")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.204941, 0, 8.88178e-16, 0, 1.70908, 0, -8.88178e-16, 0, 0.198317, 0, -1.91354, 0.0228017)
+mesh = SubResource("CylinderMesh_wfmfw")
+
+[node name="top" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.23826e-08, -0.182503, 5.68434e-14, 0.9696, -7.97747e-09, 0, 2.75286e-21, 1.33227e-14, 0.986866, 0.0530253, 0, -2.31781e-09)
+top_level = true
+mesh = SubResource("CylinderMesh_724jf")

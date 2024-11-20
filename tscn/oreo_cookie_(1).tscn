@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cf873dd46vab0"]
+
+[ext_resource type="PackedScene" uid="uid://ueot3777osbb" path="res://assets/collectables/oreo_cookie (1).glb" id="1_v6ymv"]
+[ext_resource type="Material" uid="uid://bkqk0xpnr3hed" path="res://assets/collectables/cookie_material.tres" id="2_x35ta"]
+[ext_resource type="ArrayMesh" uid="uid://4fjg3vh2kp8r" path="res://assets/tres/cookie_mesh_0.tres" id="3_xbhs1"]
+[ext_resource type="ArrayMesh" uid="uid://cv6fig2r78ads" path="res://assets/tres/cookie_mesh_1.tres" id="4_nbn8t"]
+
+[node name="oreo_cookie (1)" instance=ExtResource("1_v6ymv")]
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(0.02, 0, 0, 0, -8.74228e-10, 0.02, 0, -0.02, -8.74228e-10, 0, 0, 0)
+
+[node name="pCylinder1_Chocolate_Brown_0" parent="Sketchfab_model/1add88526ecd456bb71cb015d399b7a6fbx/RootNode/group18/group19/group20/pCylinder1" index="0"]
+surface_material_override/0 = ExtResource("2_x35ta")
+
+[node name="group15_group6_Chocolate_Brown_02" parent="Sketchfab_model/1add88526ecd456bb71cb015d399b7a6fbx/RootNode/group18/group19/group21/group15_group62" index="0"]
+mesh = ExtResource("3_xbhs1")
+
+[node name="group13_Chocolate_Brown_02" parent="Sketchfab_model/1add88526ecd456bb71cb015d399b7a6fbx/RootNode/group18/group19/group21/group132" index="0"]
+mesh = ExtResource("4_nbn8t")
+
+[node name="pCylinder1_Chocolate_Brown_02" parent="Sketchfab_model/1add88526ecd456bb71cb015d399b7a6fbx/RootNode/group18/group19/group21/pCylinder12" index="0"]
+surface_material_override/0 = ExtResource("2_x35ta")

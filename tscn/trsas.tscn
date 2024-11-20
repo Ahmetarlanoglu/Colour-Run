@@ -1,0 +1,261 @@
+[gd_scene load_steps=31 format=3 uid="uid://qtx5ubo68voy"]
+
+[ext_resource type="Script" path="res://assets/tscn/trsas.gd" id="1_o0hgw"]
+[ext_resource type="PackedScene" uid="uid://dourtugoa3u0w" path="res://assets/tscn/main.tscn" id="2_sgx51"]
+[ext_resource type="PackedScene" uid="uid://cnco8mlq7qnrw" path="res://export/real_barier.tscn" id="3_8x668"]
+[ext_resource type="PackedScene" uid="uid://cbxo5jn337ufa" path="res://assets/tscn/food_cat.tscn" id="5_1syrf"]
+[ext_resource type="PackedScene" uid="uid://s306bdbpw1a" path="res://assets/tscn/coin_cat.tscn" id="5_cqxbm"]
+[ext_resource type="PackedScene" uid="uid://dqbswkpkavjnr" path="res://export/test_arena.tscn" id="6_h37sk"]
+[ext_resource type="PackedScene" uid="uid://c844beajpgiws" path="res://assets/tscn/member_pivot.tscn" id="6_hcd3s"]
+[ext_resource type="PackedScene" uid="uid://0b86bg4d24no" path="res://assets/tscn/barier_Scenes/axe_barier.tscn" id="6_kute4"]
+[ext_resource type="PackedScene" uid="uid://6uxi7yduqwei" path="res://assets/tscn/cat_pack.tscn" id="6_pqta5"]
+[ext_resource type="PackedScene" uid="uid://ci8dy6w37fj6p" path="res://export/gate.tscn" id="7_a4k0u"]
+[ext_resource type="PackedScene" uid="uid://cqv8v3741p4mg" path="res://assets/tscn/barier_Scenes/saw_barier.tscn" id="7_bd2yb"]
+[ext_resource type="PackedScene" uid="uid://miunddoba1a" path="res://assets/tscn/barier_Scenes/silindir_barier_2.tscn" id="8_pp0ea"]
+[ext_resource type="PackedScene" uid="uid://mtvgdgle8hc4" path="res://assets/tscn/barier_Scenes/saw_barier_2.tscn" id="9_lp3e4"]
+[ext_resource type="Texture2D" uid="uid://deash0vdu8qg7" path="res://export/420_pixel.png" id="9_tillp"]
+[ext_resource type="PackedScene" uid="uid://nukg28vnhn02" path="res://assets/tscn/barier_Scenes/cube_barier_2.tscn" id="10_n02bh"]
+[ext_resource type="PackedScene" uid="uid://dkbhfmve4bg54" path="res://assets/tscn/wall.tscn" id="13_6rp8w"]
+[ext_resource type="PackedScene" uid="uid://i1gfil8eth4o" path="res://assets/tscn/meat.tscn" id="15_1nmft"]
+[ext_resource type="Texture2D" uid="uid://cqq1ijgfy5as8" path="res://export/deneme3.png" id="16_trw2o"]
+[ext_resource type="Script" path="res://export/Terrain2.gd" id="17_inqp7"]
+[ext_resource type="Script" path="res://export/StaticBod.gd" id="18_ocwbd"]
+
+[sub_resource type="Gradient" id="Gradient_jwnw0"]
+offsets = PackedFloat32Array(0, 0.649351)
+colors = PackedColorArray(0.466667, 0.741176, 0.729412, 1, 0.466667, 0.741176, 0.729412, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sl73k"]
+gradient = SubResource("Gradient_jwnw0")
+height = 62
+use_hdr = true
+fill_from = Vector2(0.394309, 0.30632)
+fill_to = Vector2(0.536, 1.004)
+
+[sub_resource type="Gradient" id="Gradient_qo65t"]
+colors = PackedColorArray(0.466667, 0.689706, 0.741176, 1, 0.466667, 0.741176, 0.729412, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p1ret"]
+gradient = SubResource("Gradient_qo65t")
+height = 62
+use_hdr = true
+fill_from = Vector2(0.682927, 0.268555)
+fill_to = Vector2(0.536, 1.004)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jl66"]
+albedo_color = Color(0.882353, 0.882353, 0.882353, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_484g3"]
+material = SubResource("StandardMaterial3D_6jl66")
+size = Vector3(0.273, 0.772, 20.44)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v1ql8"]
+material = SubResource("StandardMaterial3D_6jl66")
+size = Vector3(0.273, 0.772, 4.935)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g7a5j"]
+albedo_color = Color(0.658824, 0.760784, 0.945098, 1)
+albedo_texture = ExtResource("16_trw2o")
+emission_energy_multiplier = 16.0
+rim = 0.14
+texture_filter = 4
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dvnby"]
+material = SubResource("StandardMaterial3D_g7a5j")
+size = Vector2(3.269, 5.094)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_unl4t"]
+size = Vector3(16, 0.492, 5.031)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_o0hgw")
+background_color = Color(0.372549, 0.686275, 0.894118, 1)
+light_color = Color(0.72549, 0.819608, 0.819608, 1)
+
+[node name="main" parent="." instance=ExtResource("2_sgx51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.753136, -1.71744, 10.1201)
+
+[node name="members" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.8943)
+
+[node name="member_pivot" parent="members" instance=ExtResource("6_hcd3s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.56959)
+
+[node name="cat_pack2" parent="members" instance=ExtResource("6_pqta5")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 1.64325, -0.825626, 52.5182)
+single = true
+
+[node name="cat_pack6" parent="members" instance=ExtResource("6_pqta5")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 2.69193, 0.138842, 24.256)
+single = true
+
+[node name="cat_pack7" parent="members" instance=ExtResource("6_pqta5")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, -0.707222, -0.210782, 39.6283)
+single = true
+
+[node name="cat_pack11" parent="members" instance=ExtResource("6_pqta5")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 3.35935, -0.210782, 47.5539)
+single = true
+
+[node name="cat_pack12" parent="members" instance=ExtResource("6_pqta5")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, -0.707222, -0.210782, 45.3313)
+single = true
+
+[node name="cat_pack9" parent="members" instance=ExtResource("6_pqta5")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 1.95305, -0.825626, 6.0004)
+single = true
+
+[node name="cat_pack10" parent="members" instance=ExtResource("6_pqta5")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.598384, 1.54764, 25.1461)
+single = true
+
+[node name="bariers" type="Node3D" parent="."]
+
+[node name="box_barier6" parent="bariers" instance=ExtResource("3_8x668")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.991408, -1.62701, 66.1098)
+
+[node name="axe_barier" parent="bariers" instance=ExtResource("6_kute4")]
+transform = Transform3D(-2.57897e-08, 0, -0.59, 0, 0.59, 0, 0.59, 0, -2.57897e-08, 0.981482, 0.34072, 69.7827)
+
+[node name="saw_barier" parent="bariers" instance=ExtResource("7_bd2yb")]
+transform = Transform3D(-6.6485e-08, 0, -1.521, 0, 1.521, 0, 1.521, 0, -6.6485e-08, 0, -1.21218, 33.4133)
+
+[node name="silindir_barier_2" parent="bariers" instance=ExtResource("8_pp0ea")]
+transform = Transform3D(1.521, 0, 0, 0, 1.521, 0, 0, 0, 1.521, 0.878038, -2.01558, 71.6112)
+
+[node name="saw_barier_2" parent="bariers" instance=ExtResource("9_lp3e4")]
+transform = Transform3D(0.00179152, -0.342146, -1.48202, -1.51939, 0.0676967, -0.0174654, 0.0698904, 1.48047, -0.341704, 0, -1.47469, 25.7368)
+
+[node name="box_barier_2" parent="bariers" instance=ExtResource("10_n02bh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -1.72045, 29.2824)
+
+[node name="collectables" type="Node3D" parent="."]
+
+[node name="cat_coin2" parent="collectables" instance=ExtResource("5_cqxbm")]
+transform = Transform3D(2.971, 0, 0, 0, 2.971, 0, 0, 0, 2.971, 0, -1.12185, 38.3935)
+
+[node name="cat_coin4" parent="collectables" instance=ExtResource("5_cqxbm")]
+transform = Transform3D(2.971, 0, 0, 0, 2.971, 0, 0, 0, 2.971, 1.83827, -1.12184, 47.0229)
+
+[node name="cat_food3" parent="collectables" instance=ExtResource("5_1syrf")]
+transform = Transform3D(-2.65653, 0, 1.33029, 0, 2.971, 0, -1.33029, 0, -2.65653, 0.773613, -1.39136, 44.1689)
+
+[node name="gates" type="Node3D" parent="."]
+
+[node name="Gate2" parent="gates" instance=ExtResource("7_a4k0u")]
+transform = Transform3D(-2.18084, 0, -0.0266449, 0, 2.181, 0, 0.0266449, 0, -2.18084, -0.845615, -0.72394, 48.5369)
+color = Color(0.458824, 0.321569, 0.94902, 1)
+
+[node name="Gate3" parent="gates" instance=ExtResource("7_a4k0u")]
+transform = Transform3D(-2.18084, 0, -0.0266449, 0, 2.181, 0, 0.0266449, 0, -2.18084, 2.30817, -0.72394, 58.188)
+color = Color(0.964706, 0.329412, 0.352941, 1)
+
+[node name="Gate4" parent="gates" instance=ExtResource("7_a4k0u")]
+transform = Transform3D(-2.18084, 0, -0.0266449, 0, 2.181, 0, 0.0266449, 0, -2.18084, 0.902402, -0.72394, 52.9888)
+color = Color(0.94902, 0.717647, 0.0196078, 1)
+
+[node name="Arena" parent="." instance=ExtResource("6_h37sk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80267, 0, 25.3983)
+
+[node name="enviroment" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, -0.873194, 0.487372, 0, -0.487372, -0.873194, 0.313584, 4.53873, -5.08536)
+light_energy = 0.608
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_bake_mode = 0
+light_cull_mask = 4294966273
+shadow_enabled = true
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="enviroment"]
+
+[node name="Label" type="Label" parent="enviroment/CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+anchors_preset = -1
+anchor_top = 0.344
+anchor_right = 0.813
+anchor_bottom = 0.562
+offset_left = 0.999996
+offset_top = -0.240021
+offset_right = -182.96
+offset_bottom = -78.64
+scale = Vector2(1.717, 1.717)
+text = "asdasd"
+
+[node name="smoke" type="Sprite2D" parent="enviroment/CanvasLayer"]
+position = Vector2(320, 184.26)
+scale = Vector2(40.134, 8.763)
+texture = SubResource("GradientTexture2D_sl73k")
+
+[node name="smoke2" type="Sprite2D" parent="enviroment/CanvasLayer"]
+position = Vector2(320, 184.26)
+scale = Vector2(40.134, 8.763)
+texture = SubResource("GradientTexture2D_p1ret")
+
+[node name="backgorund_bottom" type="Sprite3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, 0.11133, -0.993783, 0, 0.993783, 0.11133, 0, -5.01441, 87.43)
+layers = 64
+pixel_size = 0.3352
+texture = ExtResource("9_tillp")
+
+[node name="Sprite3D3" type="Sprite3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.20204, 131.374)
+visible = false
+layers = 64
+gi_mode = 0
+modulate = Color(0.466667, 0.741176, 0.729412, 1)
+pixel_size = 0.3352
+texture = ExtResource("9_tillp")
+
+[node name="finish" type="Node3D" parent="."]
+editor_description = "kudurtmal yapalim kolay kolay ete ulasilmasin
+"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512201, -0.160742, 88.5336)
+
+[node name="wall" parent="finish" instance=ExtResource("13_6rp8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -10.9511)
+
+[node name="wall2" parent="finish" instance=ExtResource("13_6rp8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -9.53826)
+
+[node name="wall3" parent="finish" instance=ExtResource("13_6rp8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -12.1816)
+
+[node name="meat" parent="finish" instance=ExtResource("15_1nmft")]
+transform = Transform3D(-0.00454646, 0, -1.49699, 0, 1.497, 0, 1.49699, 0, -0.00454646, 0.434523, -1.26983, -5.82124)
+
+[node name="side_right" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36213, -1.4829, 8.57693)
+visible = false
+mesh = SubResource("BoxMesh_484g3")
+
+[node name="side_right5" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.447132, -1.8165, -1.62196)
+mesh = SubResource("BoxMesh_v1ql8")
+
+[node name="side_left" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96785, -1.4829, 8.57692)
+visible = false
+mesh = SubResource("BoxMesh_484g3")
+
+[node name="Terrain10" type="MeshInstance3D" parent="finish" groups=["ground"]]
+process_priority = -20
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 5.161, 0.418184, -1.86299, 32.3925)
+visible = false
+mesh = SubResource("PlaneMesh_dvnby")
+script = ExtResource("17_inqp7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="finish/Terrain10" groups=["ground"]]
+collision_layer = 4
+collision_mask = 19
+script = ExtResource("18_ocwbd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="finish/Terrain10/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.259929, 0)
+shape = SubResource("BoxShape3D_unl4t")
+
+[node name="Node" type="Node" parent="finish/Terrain10"]

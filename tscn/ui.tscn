@@ -1,0 +1,411 @@
+[gd_scene load_steps=23 format=3 uid="uid://dpcvx5frmsxuw"]
+
+[ext_resource type="Script" path="res://gd/ui.gd" id="1_l6xrd"]
+[ext_resource type="Texture2D" uid="uid://bjirh7y74dq0p" path="res://assets/ui/Sprite-0001.png" id="2_6jrom"]
+[ext_resource type="Texture2D" uid="uid://bjh6whrgoc778" path="res://assets/collectables/single_gold.png" id="3_eeqa6"]
+[ext_resource type="AudioStream" uid="uid://1vvwnwsu6a3i" path="res://assets/ui/WhatsApp-Video-2023-10-04-at-13.55.29_1d1ecc5d.ogg" id="4_ska6h"]
+[ext_resource type="Texture2D" uid="uid://j1hnetokn5lf" path="res://assets/ui/hat.png" id="5_ikwta"]
+
+[sub_resource type="FontVariation" id="FontVariation_680jx"]
+
+[sub_resource type="Theme" id="Theme_w377s"]
+default_base_scale = 1.29
+default_font = SubResource("FontVariation_680jx")
+default_font_size = 39
+
+[sub_resource type="FontVariation" id="FontVariation_7youn"]
+variation_embolden = 0.87
+
+[sub_resource type="Theme" id="Theme_ivsop"]
+default_base_scale = 1.29
+default_font = SubResource("FontVariation_7youn")
+default_font_size = 39
+
+[sub_resource type="FontVariation" id="FontVariation_4vfpg"]
+variation_embolden = 0.8
+spacing_glyph = 3
+
+[sub_resource type="Theme" id="Theme_3iosy"]
+default_font = SubResource("FontVariation_4vfpg")
+default_font_size = 60
+
+[sub_resource type="Gradient" id="Gradient_585lo"]
+offsets = PackedFloat32Array(0, 0.436059, 0.572327, 1)
+colors = PackedColorArray(0, 0.078125, 1, 0, 0.366347, 0.655613, 0.963542, 1, 0.346644, 0.618816, 0.964419, 0.943874, 0.0152995, 0, 0.979167, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m1d7d"]
+gradient = SubResource("Gradient_585lo")
+width = 401
+
+[sub_resource type="Gradient" id="Gradient_6gvry"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1smdi"]
+gradient = SubResource("Gradient_6gvry")
+width = 831
+
+[sub_resource type="Theme" id="Theme_tjqu2"]
+default_font = SubResource("FontVariation_4vfpg")
+default_font_size = 44
+
+[sub_resource type="FontVariation" id="FontVariation_ouiap"]
+variation_embolden = 0.8
+
+[sub_resource type="Theme" id="Theme_ckrb4"]
+default_font = SubResource("FontVariation_ouiap")
+default_font_size = 28
+
+[sub_resource type="Animation" id="Animation_8kxdk"]
+resource_name = "scale"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("continue_rect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.63, 0.325), Vector2(0.655, 0.338)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("continue_label:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.505, 0.505), Vector2(0.535, 0.535)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("lose_label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(112, 120), Vector2(115, 108.92)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mibkt"]
+_data = {
+"scale": SubResource("Animation_8kxdk")
+}
+
+[sub_resource type="GDScript" id="GDScript_01w6k"]
+script/source = "extends MarginContainer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	GlobalSave.loadValue(\"player\",\"section1\")
+	if GlobalSave.display_value<7 :
+		queue_free()
+		get_parent().get_node(\"gold_texture3\").queue_free()
+
+
+
+func _on_hat_button_button_down():
+	Global.money_collected-=400
+	get_node(\"/root/Node3D/main/cat_pack/TuxCat/Node3D\").visible=true
+	get_parent().get_node(\"gold_texture3\").queue_free()
+	self.queue_free()
+func _input(event):#arena sinirlarini halletikten ve speedi ayarladiktan sonra  sonra sil burayi
+	if event is InputEventMouseButton and event.is_pressed() :
+		await get_tree().create_timer(0.1).timeout
+		get_parent().get_node(\"gold_texture3\").queue_free()
+		self.queue_free()
+	elif  event is InputEventMouseMotion and event.is_pressed():
+		await get_tree().create_timer(1).timeout
+		get_parent().get_node(\"gold_texture3\").queue_free()
+		self.queue_free()
+"
+
+[sub_resource type="Theme" id="Theme_bc2re"]
+default_font = SubResource("FontVariation_ouiap")
+default_font_size = 83
+
+[node name="ui" type="Node"]
+process_mode = 3
+script = ExtResource("1_l6xrd")
+
+[node name="level_label" type="Label" parent="."]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.0
+offset_top = 30.0
+offset_right = 78.0
+offset_bottom = 118.0
+grow_horizontal = 2
+theme = SubResource("Theme_w377s")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+text = "SEVIYE 1
+"
+
+[node name="earned_money_label" type="Label" parent="."]
+visible = false
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -314.0
+offset_right = 206.0
+offset_bottom = -226.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme = SubResource("Theme_ivsop")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "+543"
+
+[node name="lose_label" type="Label" parent="."]
+visible = false
+z_index = 2
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.09
+anchor_right = 0.5
+anchor_bottom = 0.09
+offset_left = -158.0
+offset_top = 33.6
+offset_right = 158.0
+offset_bottom = 119.604
+grow_horizontal = 2
+theme = SubResource("Theme_3iosy")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "YOU LOST"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = 132.0
+offset_right = 130.0
+offset_bottom = 218.0
+grow_horizontal = 2
+
+[node name="win_label" type="Label" parent="MarginContainer"]
+z_index = 2
+layout_mode = 2
+theme = SubResource("Theme_3iosy")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "You Win"
+
+[node name="smoke" type="Sprite2D" parent="MarginContainer"]
+z_index = 1
+position = Vector2(130.5, 53)
+scale = Vector2(1.625, 121.2)
+texture = SubResource("GradientTexture1D_m1d7d")
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
+z_index = 1
+position = Vector2(132, -7.5)
+texture = SubResource("GradientTexture1D_1smdi")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MarginContainer"]
+z_index = 1
+position = Vector2(132, 113.5)
+texture = SubResource("GradientTexture1D_1smdi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0745098, 0.0666667, 0.105882, 0.862745)
+
+[node name="continue_label" type="Label" parent="."]
+visible = false
+z_index = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -61.0
+offset_top = -158.0
+offset_right = 263.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.519121, 0.519121)
+theme = SubResource("Theme_tjqu2")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "CONTINUE
+"
+
+[node name="continue_rect" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+clip_contents = true
+custom_minimum_size = Vector2(8.535, 1.64)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -109.0
+offset_top = -184.0
+offset_right = 254.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.63, 0.325)
+texture = ExtResource("2_6jrom")
+
+[node name="gold_texture" type="TextureRect" parent="."]
+z_index = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 24.0
+offset_right = 439.0
+offset_bottom = 531.0
+grow_horizontal = 0
+scale = Vector2(0.075, 0.075)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_eeqa6")
+
+[node name="gold_texture2" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -304.0
+offset_right = 544.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("3_eeqa6")
+stretch_mode = 2
+
+[node name="gold_label" type="Label" parent="."]
+z_index = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -131.0
+offset_top = 20.0
+offset_right = -70.0
+offset_bottom = 65.0
+grow_horizontal = 0
+theme = SubResource("Theme_ckrb4")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "543"
+
+[node name="gold_label2" type="Label" parent="."]
+visible = false
+z_index = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -95.0
+offset_top = -362.0
+offset_right = 107.0
+offset_bottom = -317.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_ckrb4")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "YOU EARNED:"
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.0235294)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -187.0
+offset_right = 132.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 0
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "scale"
+libraries = {
+"": SubResource("AnimationLibrary_mibkt")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ska6h")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 116.0
+offset_top = -334.0
+offset_right = 407.0
+offset_bottom = 134.0
+grow_vertical = 0
+scale = Vector2(0.325, 0.363)
+size_flags_horizontal = 8
+script = SubResource("GDScript_01w6k")
+
+[node name="hat_button" type="Button" parent="MarginContainer2"]
+layout_mode = 2
+icon = ExtResource("5_ikwta")
+flat = true
+
+[node name="gold_label" type="Label" parent="MarginContainer2"]
+z_index = 2
+layout_mode = 2
+theme = SubResource("Theme_bc2re")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "
+
+
+400"
+
+[node name="gold_texture3" type="TextureRect" parent="."]
+z_index = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 166.0
+offset_top = -206.0
+offset_right = 665.0
+offset_bottom = 301.0
+grow_vertical = 0
+scale = Vector2(0.075, 0.075)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_eeqa6")
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="MarginContainer2/hat_button" to="MarginContainer2" method="_on_hat_button_button_down"]

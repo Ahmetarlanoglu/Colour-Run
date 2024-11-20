@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2fxhfh2c1h7h"]
+
+[ext_resource type="PackedScene" uid="uid://doblp05hofaob" path="res://assets/tscn/the_witchs_hat.tscn" id="1_oi5jf"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1.105, 0, 0, 0, 1.105, 0, 0, 0, 1.105, 0, -0.939791, -1.99043)
+
+[node name="the_witchs_hat" parent="." instance=ExtResource("1_oi5jf")]
+transform = Transform3D(0.836717, 0, 0, 0, 0.836717, 0, 0, 0, 0.836717, 0.16812, 8.87184, 3.65944)

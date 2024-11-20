@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://dixpnfgrciuab"]
+
+[ext_resource type="Script" path="res://gd/basic_barier.gd" id="1_rwws0"]
+[ext_resource type="PackedScene" uid="uid://mi7yi0r0vhvu" path="res://assets/tscn/fist.tscn" id="2_bvkcc"]
+[ext_resource type="PackedScene" uid="uid://wukfktbil01w" path="res://assets/bariers/cube.tscn" id="3_i57pj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_03xgy"]
+rough = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_eynt7"]
+points = PackedVector3Array(0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1)
+
+[sub_resource type="Animation" id="Animation_mr41w"]
+resource_name = "swing"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 2, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6mo1"]
+_data = {
+"swing": SubResource("Animation_mr41w")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b4ugv"]
+size = Vector3(0.565, 0.58, 0.82)
+
+[node name="fist_barier" type="StaticBody3D" groups=["barier"]]
+collision_layer = 8
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_03xgy")
+script = ExtResource("1_rwws0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.934, 0, 0, 0, 0.934, 0, 0, 0, 0.934, -0.440414, -0.395826, -0.155583)
+shape = SubResource("ConvexPolygonShape3D_eynt7")
+
+[node name="scene" parent="." instance=ExtResource("2_bvkcc")]
+transform = Transform3D(0.362, 0, 0, 0, 0.362, 0, 0, 0, 0.362, -0.740315, 0.783985, 2.89439)
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g6mo1")
+}
+
+[node name="Area3D" type="Area3D" parent="." groups=["barier"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.384)
+shape = SubResource("BoxShape3D_b4ugv")
+
+[node name="cube" parent="." instance=ExtResource("3_i57pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111669, 0.319065, 0.3965)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c844beajpgiws"]
+
+[ext_resource type="Script" path="res://gd/member_pivot.gd" id="1_7l68g"]
+[ext_resource type="PackedScene" uid="uid://6uxi7yduqwei" path="res://assets/tscn/cat_pack.tscn" id="2_ehf6f"]
+
+[node name="member_pivot" type="Node3D"]
+script = ExtResource("1_7l68g")
+
+[node name="cat_pack5" parent="." instance=ExtResource("2_ehf6f")]
+
+[node name="cat_pack4" parent="." instance=ExtResource("2_ehf6f")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.429145, 0, 0)
+
+[node name="cat_pack3" parent="." instance=ExtResource("2_ehf6f")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, -0.378654, 0, 0)

@@ -1,0 +1,212 @@
+[gd_scene load_steps=24 format=3 uid="uid://6gs55jba16l6"]
+
+[ext_resource type="PackedScene" uid="uid://dourtugoa3u0w" path="res://assets/tscn/main.tscn" id="2_x3fi4"]
+[ext_resource type="PackedScene" uid="uid://c844beajpgiws" path="res://assets/tscn/member_pivot.tscn" id="3_t7k1a"]
+[ext_resource type="PackedScene" uid="uid://6uxi7yduqwei" path="res://assets/tscn/cat_pack.tscn" id="4_6hvlh"]
+[ext_resource type="PackedScene" uid="uid://drj4gyxnkx6et" path="res://assets/tscn/barier_Scenes/cube_barier.tscn" id="5_rfb76"]
+[ext_resource type="PackedScene" uid="uid://mk1q054v0c3q" path="res://assets/tscn/barier_Scenes/silindir_barier.tscn" id="7_pfnas"]
+[ext_resource type="PackedScene" uid="uid://cbxo5jn337ufa" path="res://assets/tscn/food_cat.tscn" id="7_wd7q8"]
+[ext_resource type="PackedScene" uid="uid://ci8dy6w37fj6p" path="res://export/gate.tscn" id="8_ifx8h"]
+[ext_resource type="PackedScene" uid="uid://swdm625dnnqx" path="res://export/test_arena_2.tscn" id="8_yl0bi"]
+[ext_resource type="PackedScene" uid="uid://dkbhfmve4bg54" path="res://assets/tscn/wall.tscn" id="9_n4l14"]
+[ext_resource type="PackedScene" uid="uid://i1gfil8eth4o" path="res://assets/tscn/meat.tscn" id="10_uhaax"]
+[ext_resource type="PackedScene" uid="uid://cs55yc5r84e8v" path="res://assets/tscn/confeeti.tscn" id="11_q7v3u"]
+[ext_resource type="PackedScene" uid="uid://bpt5ienk685i4" path="res://assets/tscn/finish_flag.tscn" id="12_yrrip"]
+[ext_resource type="Texture2D" uid="uid://deash0vdu8qg7" path="res://export/420_pixel.png" id="13_2581e"]
+[ext_resource type="PackedScene" uid="uid://r28vjysfm5ow" path="res://blue_trees.tscn" id="13_edv0m"]
+[ext_resource type="PackedScene" uid="uid://dpcvx5frmsxuw" path="res://assets/tscn/ui.tscn" id="14_1exbx"]
+[ext_resource type="PackedScene" uid="uid://b8jemt6b0i4my" path="res://assets/tscn/smoke_blue.tscn" id="14_3hdtb"]
+
+[sub_resource type="GDScript" id="GDScript_1uc7h"]
+script/source = "extends Node3D
+var speed
+
+@export var background_color:Color
+@export var light_color:Color
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	Global.next_level=\"res://assets/tscn/levels/Level_3.tscn\"
+	$enviroment/backgorund_bottom.modulate=background_color
+	var scaler=DisplayServer.window_get_size(0).y/960
+	$enviroment/CanvasLayer/smoke.scale.y*=scaler
+	$enviroment/CanvasLayer/smoke.position.y+=(scaler-1)*250
+	var smoke_color=background_color-Color(0.1,0.1,0.1,0)
+	$enviroment/CanvasLayer/smoke.texture.gradient.set_color(0,smoke_color)
+#	$enviroment/CanvasLayer/smoke.texture.gradient.set_color(0,background_color)
+	RenderingServer.set_default_clear_color(light_color)
+# Called every frame.'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	$enviroment/CanvasLayer/Label.text=str(Global.debugger)
+	Global.debugger=1/delta
+#	$finish/salmon_fish/Sketchfab_model/e5af0b77e1ee488c94a9e0740d42756dfbx/RootNode/Cube018/Cube018_Material010_0.rotate_y(delta)
+
+func _on_area_3d_area_entered(_area):
+	pass # Replace with function body.
+
+func _on_area_3d_body_entered(body):
+	body.global_position.x+=1
+	body.global_position.y+=1
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jl66"]
+albedo_color = Color(0.882353, 0.882353, 0.882353, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v1ql8"]
+material = SubResource("StandardMaterial3D_6jl66")
+size = Vector3(0.273, 0.772, 4.935)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vadeq"]
+albedo_color = Color(0.227451, 0.227451, 0.227451, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_buv62"]
+material = SubResource("StandardMaterial3D_vadeq")
+radius = 0.11
+height = 5.567
+
+[sub_resource type="Gradient" id="Gradient_jwnw0"]
+offsets = PackedFloat32Array(0, 0.649351)
+colors = PackedColorArray(0.466667, 0.741176, 0.729412, 1, 0.466667, 0.741176, 0.729412, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sl73k"]
+gradient = SubResource("Gradient_jwnw0")
+height = 62
+use_hdr = true
+fill_from = Vector2(0.394309, 0.30632)
+fill_to = Vector2(0.536, 1.004)
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_1uc7h")
+background_color = Color(0.231373, 0.654902, 0.894118, 1)
+light_color = Color(0.81, 0.9, 0.95, 1)
+
+[node name="main" parent="." instance=ExtResource("2_x3fi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.753136, -1.71744, 18.7293)
+
+[node name="members" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.35936)
+
+[node name="member_pivot" parent="members" instance=ExtResource("3_t7k1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.262891, -0.252851, 17.1239)
+
+[node name="member_pivot2" parent="members" instance=ExtResource("3_t7k1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38515, -0.252851, 26.4989)
+
+[node name="cat_pack9" parent="members" instance=ExtResource("4_6hvlh")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.942424, -0.825626, 21.505)
+single = true
+
+[node name="bariers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.53494)
+
+[node name="box_barier2" parent="bariers" instance=ExtResource("5_rfb76")]
+transform = Transform3D(-5.74368e-08, 0, -1.314, 0, 1.314, 0, 1.314, 0, -5.74368e-08, 2.45133, -1.65222, 30.5831)
+
+[node name="box_barier3" parent="bariers" instance=ExtResource("5_rfb76")]
+transform = Transform3D(-5.76553e-08, 0, -1.319, 0, 1.319, 0, 1.319, 0, -5.76553e-08, -0.285274, -1.65222, 39.3814)
+
+[node name="silindir_barier" parent="bariers" instance=ExtResource("7_pfnas")]
+transform = Transform3D(2.328, 0, 0, 0, 2.328, 0, 0, 0, 2.328, 0.941568, -2.15685, 57.1891)
+color = Color(0.964706, 0.329412, 0.352941, 1)
+speed = 2.0
+
+[node name="collectables" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.53494)
+
+[node name="cat_food3" parent="collectables" instance=ExtResource("7_wd7q8")]
+transform = Transform3D(-2.65653, 0, 1.33029, 0, 2.971, 0, -1.33029, 0, -2.65653, 0.773613, -1.22925, 44.3209)
+
+[node name="Arena" parent="." instance=ExtResource("8_yl0bi")]
+transform = Transform3D(1.048, 0, 0, 0, 1, 0, 0, 0, 1.25, 0.8, 0.00281699, 25.398)
+
+[node name="gates" type="Node3D" parent="."]
+
+[node name="Gate2" parent="gates" instance=ExtResource("8_ifx8h")]
+transform = Transform3D(-2.18084, 0, -0.0266449, 0, 2.181, 0, 0.0266449, 0, -2.18084, -0.102434, -0.72394, 46.5344)
+color = Color(0.458824, 0.321569, 0.94902, 1)
+
+[node name="Gate3" parent="gates" instance=ExtResource("8_ifx8h")]
+transform = Transform3D(-2.18084, 0, -0.0266449, 0, 2.181, 0, 0.0266449, 0, -2.18084, 2.30817, -0.72394, 46.5083)
+color = Color(0.964706, 0.329412, 0.352941, 1)
+
+[node name="finish" type="Node3D" parent="."]
+editor_description = "kudurtmal yapalim kolay kolay ete ulasilmasin
+"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512201, -0.160742, 75.3651)
+
+[node name="wall" parent="finish" instance=ExtResource("9_n4l14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -10.9511)
+
+[node name="wall2" parent="finish" instance=ExtResource("9_n4l14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -9.53826)
+
+[node name="wall3" parent="finish" instance=ExtResource("9_n4l14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -12.1816)
+
+[node name="meat" parent="finish" instance=ExtResource("10_uhaax")]
+transform = Transform3D(-0.00454646, 0, -1.49699, 0, 1.497, 0, 1.49699, 0, -0.00454646, 0.434523, -1.26983, -5.82124)
+
+[node name="side_right5" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(-4.37114e-08, 0, 1.17101, 0, 1, 0, -1, 0, -5.11865e-08, 0.447132, -1.7418, -4.99996)
+mesh = SubResource("BoxMesh_v1ql8")
+
+[node name="Area3D" parent="finish" instance=ExtResource("11_q7v3u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.381615, -0.674872, -14.5324)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1.16223, 0.413118, -1.74578, -14.8669)
+visible = false
+mesh = SubResource("CapsuleMesh_buv62")
+
+[node name="CSGCombiner3D" parent="finish" instance=ExtResource("12_yrrip")]
+transform = Transform3D(0.0750657, 0, 0, 0, 0.0598995, 0, 0, 0, 0.085, 0.414204, -1.75247, -14.9784)
+
+[node name="enviroment" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="trees" parent="enviroment" instance=ExtResource("13_edv0m")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="enviroment"]
+
+[node name="ui" parent="enviroment/CanvasLayer" instance=ExtResource("14_1exbx")]
+
+[node name="Label" type="Label" parent="enviroment/CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+anchors_preset = -1
+anchor_top = 0.344
+anchor_right = 0.813
+anchor_bottom = 0.562
+offset_left = 0.999996
+offset_top = -0.240021
+offset_right = -182.96
+offset_bottom = -78.64
+scale = Vector2(1.717, 1.717)
+text = "asdasd"
+
+[node name="smoke" type="Sprite2D" parent="enviroment/CanvasLayer"]
+visible = false
+position = Vector2(320, 184.26)
+scale = Vector2(40.134, 8.763)
+texture = SubResource("GradientTexture2D_sl73k")
+
+[node name="smoke2" parent="enviroment/CanvasLayer" instance=ExtResource("14_3hdtb")]
+
+[node name="backgorund_bottom" type="Sprite3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, 0.11133, -0.993783, 0, 0.993783, 0.11133, 0, -5.01441, 87.43)
+layers = 64
+pixel_size = 0.3352
+texture = ExtResource("13_2581e")
+
+[node name="Sprite3D3" type="Sprite3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.20204, 131.374)
+visible = false
+layers = 64
+gi_mode = 0
+modulate = Color(0.466667, 0.741176, 0.729412, 1)
+pixel_size = 0.3352
+texture = ExtResource("13_2581e")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, -0.165048, 0.986286, 0, -0.986286, -0.165048, 0.313584, 4.53873, -5.08536)
+light_cull_mask = 4294966273
+directional_shadow_mode = 0
+sky_mode = 1

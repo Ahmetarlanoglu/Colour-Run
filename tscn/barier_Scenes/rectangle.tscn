@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnym6pxhou72w"]
+
+[ext_resource type="PackedScene" uid="uid://c7d06hfv5l8oi" path="res://assets/bariers/rectangle.blend" id="1_o3ltx"]
+
+[sub_resource type="GDScript" id="GDScript_e3ac8"]
+script/source = "extends Node3D
+var color=Color(0,0,0,0)
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckhnb"]
+albedo_color = Color(0.368627, 0.0156863, 0.478431, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n2v74"]
+size = Vector3(2.08, 1, 2.11)
+
+[node name="rectangle" instance=ExtResource("1_o3ltx")]
+script = SubResource("GDScript_e3ac8")
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ckhnb")
+
+[node name="Area3D" type="Area3D" parent="." index="1" groups=["barier"]]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(0.934, 0, 0, 0, 0.934, 0, 0, 0, 0.934, -0.00961659, 0.241227, 0.000533365)
+shape = SubResource("BoxShape3D_n2v74")

@@ -1,0 +1,216 @@
+[gd_scene load_steps=29 format=3 uid="uid://ya6iyi0q4nnb"]
+
+[ext_resource type="Script" path="res://gd/Level_B.gd" id="1_2a413"]
+[ext_resource type="PackedScene" uid="uid://dourtugoa3u0w" path="res://assets/tscn/main.tscn" id="1_lel8b"]
+[ext_resource type="PackedScene" uid="uid://swdm625dnnqx" path="res://export/test_arena_2.tscn" id="8_e7e0t"]
+[ext_resource type="PackedScene" uid="uid://dkbhfmve4bg54" path="res://assets/tscn/wall.tscn" id="9_xo62w"]
+[ext_resource type="PackedScene" uid="uid://i1gfil8eth4o" path="res://assets/tscn/meat.tscn" id="10_kvxq8"]
+[ext_resource type="PackedScene" uid="uid://cs55yc5r84e8v" path="res://assets/tscn/confeeti.tscn" id="11_timw5"]
+[ext_resource type="PackedScene" uid="uid://bpt5ienk685i4" path="res://assets/tscn/finish_flag.tscn" id="12_uv47i"]
+[ext_resource type="PackedScene" uid="uid://r28vjysfm5ow" path="res://blue_trees.tscn" id="13_x1dxf"]
+[ext_resource type="PackedScene" uid="uid://dpcvx5frmsxuw" path="res://assets/tscn/ui.tscn" id="14_bxe3i"]
+[ext_resource type="PackedScene" uid="uid://b8jemt6b0i4my" path="res://assets/tscn/smoke_blue.tscn" id="15_ve8qi"]
+[ext_resource type="Texture2D" uid="uid://s8kfv1mt5pra" path="res://assets/collectables/PNG/Gold/Gold_11.png" id="16_hxnwg"]
+[ext_resource type="Texture2D" uid="uid://cla0ovd8l382g" path="res://assets/collectables/PNG/Gold/Gold_12.png" id="17_gm2y0"]
+[ext_resource type="Texture2D" uid="uid://cvpjii2pqyx8u" path="res://assets/collectables/PNG/Gold/Gold_13.png" id="18_nmerx"]
+[ext_resource type="Texture2D" uid="uid://cxa0m1sv6qvpc" path="res://assets/collectables/PNG/Gold/Gold_14.png" id="19_y4ll8"]
+[ext_resource type="Texture2D" uid="uid://bwtoa11ijo71j" path="res://assets/collectables/PNG/Gold/Gold_15.png" id="20_116br"]
+[ext_resource type="Texture2D" uid="uid://c8r0huugcsfyo" path="res://assets/collectables/PNG/Gold/Gold_16.png" id="21_hve3m"]
+[ext_resource type="Texture2D" uid="uid://ygnkmymwdrr0" path="res://assets/collectables/PNG/Gold/Gold_17.png" id="22_gphap"]
+[ext_resource type="Texture2D" uid="uid://1voaijb2h1xv" path="res://assets/collectables/PNG/Gold/Gold_18.png" id="23_2w8di"]
+[ext_resource type="Texture2D" uid="uid://7ruudtt6sfvr" path="res://assets/collectables/PNG/Gold/Gold_19.png" id="24_fix0g"]
+[ext_resource type="Texture2D" uid="uid://ct0qyfwwx2d7e" path="res://assets/collectables/PNG/Gold/Gold_20.png" id="25_vx5mw"]
+[ext_resource type="Texture2D" uid="uid://deash0vdu8qg7" path="res://export/420_pixel.png" id="26_n8dx8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jl66"]
+albedo_color = Color(0.882353, 0.882353, 0.882353, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v1ql8"]
+material = SubResource("StandardMaterial3D_6jl66")
+size = Vector3(0.273, 0.772, 4.935)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vadeq"]
+albedo_color = Color(0.227451, 0.227451, 0.227451, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_buv62"]
+material = SubResource("StandardMaterial3D_vadeq")
+radius = 0.11
+height = 5.567
+
+[sub_resource type="Gradient" id="Gradient_jwnw0"]
+offsets = PackedFloat32Array(0, 0.649351)
+colors = PackedColorArray(0.294118, 0.592157, 0.886275, 1, 0.466667, 0.741176, 0.729412, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sl73k"]
+gradient = SubResource("Gradient_jwnw0")
+height = 62
+use_hdr = true
+fill_from = Vector2(0.394309, 0.30632)
+fill_to = Vector2(0.536, 1.004)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_se18c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_hxnwg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_gm2y0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_nmerx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_y4ll8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_116br")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_hve3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_gphap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_2w8di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_fix0g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_vx5mw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node3D" type="Node3D"]
+editor_description = "lightb9d1d1
+"
+script = ExtResource("1_2a413")
+background_color = Color(0.231373, 0.654902, 0.894118, 1)
+light_color = Color(0.81, 0.9, 0.95, 1)
+
+[node name="main" parent="." instance=ExtResource("1_lel8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.753136, -1.71744, -0.140162)
+
+[node name="members" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.8699)
+
+[node name="bariers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.02438)
+
+[node name="collectables" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.02438)
+
+[node name="Arena" parent="." instance=ExtResource("8_e7e0t")]
+transform = Transform3D(1.048, 0, 0, 0, 1, 0, 0, 0, 1.25, 0.8, 0.00281699, 25.398)
+
+[node name="gates" type="Node3D" parent="."]
+
+[node name="finish" type="Node3D" parent="."]
+editor_description = "kudurtmal yapalim kolay kolay ete ulasilmasin
+"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512201, -0.160742, 75.3651)
+
+[node name="wall" parent="finish" instance=ExtResource("9_xo62w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413846, -1.4195, -8.10997)
+
+[node name="meat" parent="finish" instance=ExtResource("10_kvxq8")]
+transform = Transform3D(-0.00454646, 0, -1.49699, 0, 1.497, 0, 1.49699, 0, -0.00454646, 0.434523, -1.26983, -5.82124)
+
+[node name="side_right5" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(-4.37114e-08, 0, 1.17101, 0, 1, 0, -1, 0, -5.11865e-08, 0.447132, -1.7418, -4.99996)
+mesh = SubResource("BoxMesh_v1ql8")
+
+[node name="Area3D" parent="finish" instance=ExtResource("11_timw5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.381615, -0.674872, -10.9264)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1.16223, 0.413118, -1.74578, -11.2609)
+visible = false
+mesh = SubResource("CapsuleMesh_buv62")
+
+[node name="CSGCombiner3D" parent="finish" instance=ExtResource("12_uv47i")]
+transform = Transform3D(0.0750657, 0, 0, 0, 0.0598995, 0, 0, 0, 0.085, 0.414204, -1.75247, -11.3724)
+
+[node name="enviroment" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="trees" parent="enviroment" instance=ExtResource("13_x1dxf")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, -0.165048, 0.986286, 0, -0.986286, -0.165048, 0.313584, 4.53873, -5.08536)
+light_cull_mask = 4294966273
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="enviroment"]
+
+[node name="ui" parent="enviroment/CanvasLayer" instance=ExtResource("14_bxe3i")]
+
+[node name="Label" type="Label" parent="enviroment/CanvasLayer"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+anchors_preset = -1
+anchor_top = 0.344
+anchor_right = 0.813
+anchor_bottom = 0.562
+offset_left = 0.999996
+offset_top = -0.240021
+offset_right = -182.96
+offset_bottom = -78.64
+scale = Vector2(1.717, 1.717)
+text = "asdasd"
+
+[node name="smoke" type="Sprite2D" parent="enviroment/CanvasLayer"]
+editor_description = "77bdba"
+visible = false
+position = Vector2(320, 184.26)
+scale = Vector2(40.134, 8.763)
+texture = SubResource("GradientTexture2D_sl73k")
+
+[node name="smoke2" parent="enviroment/CanvasLayer" instance=ExtResource("15_ve8qi")]
+
+[node name="gold" type="AnimatedSprite2D" parent="enviroment/CanvasLayer"]
+visible = false
+modulate = Color(0.819608, 0.866667, 0.247059, 1)
+position = Vector2(515, 26)
+scale = Vector2(0.095, 0.095)
+sprite_frames = SubResource("SpriteFrames_se18c")
+autoplay = "default"
+speed_scale = 2.045
+
+[node name="Label2" type="Label" parent="enviroment/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+
+[node name="ColorRect" type="ColorRect" parent="enviroment/CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 1, 0.0784314)
+
+[node name="backgorund_bottom" type="Sprite3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, 0.11133, -0.993783, 0, 0.993783, 0.11133, 0, -5.01441, 87.43)
+layers = 2
+pixel_size = 0.3352
+texture = ExtResource("26_n8dx8")
+
+[node name="Sprite3D3" type="Sprite3D" parent="enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.20204, 131.374)
+visible = false
+layers = 64
+gi_mode = 0
+modulate = Color(0.466667, 0.741176, 0.729412, 1)
+pixel_size = 0.3352
+texture = ExtResource("26_n8dx8")

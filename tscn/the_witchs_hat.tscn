@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://doblp05hofaob"]
+
+[ext_resource type="PackedScene" path="res://assets/upgrades/the_witchs_hat.glb" id="1_1kmkb"]
+
+[node name="the_witchs_hat" instance=ExtResource("1_1kmkb")]
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(0.09, 0, 0, 0, -3.93403e-09, 0.09, 0, -0.09, -3.93403e-09, 0, 26.0777, -26.0301)

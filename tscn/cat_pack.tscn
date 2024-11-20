@@ -1,0 +1,532 @@
+[gd_scene load_steps=19 format=3 uid="uid://6uxi7yduqwei"]
+
+[ext_resource type="PackedScene" uid="uid://dpag4a2c4w31h" path="res://cats/tux_cat.tscn" id="1_ec3hs"]
+[ext_resource type="AudioStream" uid="uid://x5yn5dib0g6a" path="res://sfx/12 (mp3cut.net).mp3" id="2_tjtav"]
+[ext_resource type="Script" path="res://gd/ray.gd" id="3_mdvon"]
+[ext_resource type="AudioStream" uid="uid://c5cpwi0tjcdt7" path="res://assets/ui/2-_AudioTrimmer.com__1.ogg" id="4_swkmm"]
+[ext_resource type="AudioStream" uid="uid://bg3tbbu2nf2v3" path="res://assets/ui/2-_AudioTrimmer.com_-_2_.ogg" id="5_0bbe6"]
+[ext_resource type="AudioStream" uid="uid://c7isx15jc7b4h" path="res://assets/ui/2-_AudioTrimmer.com_-_1__1.ogg" id="6_maard"]
+
+[sub_resource type="GDScript" id="GDScript_5f5w3"]
+script/source = "extends CharacterBody3D
+var transitory_position=Vector2(955,1000)
+var dragging=-1
+var in_touch=false
+var guard=true
+var a=Vector2(0.01,0.01)
+var be =0.01
+var tran=Vector2(0,0)
+var in_click=false
+const SPEED = 5.0
+const JUMP_VELOCITY = 4.5
+var speed_counter=0
+var deltam
+var in_fallow=false
+var timer=0
+var colliding_object
+var colliding_mesh
+var dead=false
+var area_color
+var eatin=false
+var final_eatin=false
+var random_offsett=0
+@onready var animation_player=$TuxCat/AnimationPlayer
+@export var speed =0
+@export var gravity =40
+@export var pos_x=0
+@export var cat_color:Color=Color(1, 0.52941179275513, 0)
+@export var single=false
+
+@onready var root_node=get_node(\"/root/Node3D\")
+
+
+func _ready():
+#	var new_enemy = blood_scene.instantiate()
+#	$blood_pivot.add_child(new_enemy)
+
+	random_offsett=randf_range(-0.4,0.4)
+	Global.member_dict.clear()
+	$Cameram.queue_free()
+	$TuxCat/Lamp.queue_free()
+	$TuxCat/Camera.queue_free()
+	randomize()
+	$TuxCat/AnimationPlayer_real.get_animation(\"standup\").loop_mode=0
+	if single:
+		play_random_animation(animation_player)
+	else :
+		animation_player.play(\"IdleSit\")
+		$TuxCat/AnimationPlayer_real2.play(\"idlehat\")
+	animation_player.get_animation(\"WalkCycle\").set_loop_mode(true)
+	animation_player.get_animation(\"IdleSit\").set_loop_mode(true)
+	animation_player.get_animation(\"IdleNorm\").set_loop_mode(true)
+	animation_player.get_animation(\"IdleTailSwoosh\").set_loop_mode(true)
+
+	$TuxCat.rotation_degrees.y=180
+
+func _process(delta):
+
+
+#	position.x=pos_x
+	
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	if Input.is_action_just_pressed(\"ui_up\")and is_on_floor():
+		velocity.y=50
+	if $TuxCat.animation_finished:
+		velocity.z=speed*Global.speed_var
+		deltam=delta
+		if in_click and not eatin:
+			velocity.z=speed*Global.speed_var
+			animation_player.play(\"WalkCycle\")
+			$TuxCat/AnimationPlayer_real2.play(\"hat\")
+			$TuxCat.rotation_degrees.y=-(speed_counter*3)
+		elif not eatin:
+			velocity.z=0
+			if Global.speed_var!=2.5:
+				animation_player.play(\"IdleTailSwoosh\")
+				$TuxCat/AnimationPlayer_real2.play(\"idlehat\")
+			else:
+				animation_player.play(\"WalkCycle\")
+				$TuxCat/AnimationPlayer_real2.play(\"hat\")
+			$TuxCat.rotation_degrees.y=0
+	if not guard2 or not guard3:
+		repos_Anim(delta)
+		if Global.in_motion:
+			if be<13.6 and be>-11.65:
+				global_position.x+=root_node.speed.x*70*delta
+	velocity.x=0
+	velocity.y=-5
+	if in_click and speed<4 and not dead:
+		speed+=delta*10
+	if Global.level_finished and in_fallow and not eatin:
+		guard2=true
+		guard3=true
+		velocity.z=2
+		final_fight(delta)
+		$TuxCat/AnimationPlayer.speed_scale=1
+#		position.x+=10
+	elif eatin:
+		eating(delta)
+	if Global.speed_var==2.5 and in_fallow:
+		velocity.z=11
+	move_and_slide()
+
+func _input(event):#arena sinirlarini halletikten ve speedi ayarladiktan sonra  sonra sil burayi
+	if event is InputEventMouseButton and event.is_pressed() :
+		in_click=true
+		speed+=1
+	if not guard2 or not guard3:
+		if  event is InputEventMouseMotion and in_click:
+			speed_counter=(event.get_velocity().x/300)
+			if guard:
+				tran=Vector2(global_position.x,global_position.z)
+				transitory_position=event.position
+				guard=false
+			a=(event.position-transitory_position)
+			be=(a.x/-350)+tran.x
+	if event is InputEventMouseButton and !event.is_pressed():
+		guard=true
+		in_click=false
+		velocity.z=0
+#		speed_counter=0
+		speed=0
+
+var guard2=true
+func _on_area_3d_body_entered(body):
+	pass
+
+	
+	
+var guard3=true
+var blood_scene=preload(\"res://export/blood_drop.tscn\")
+var cat_id=randi()
+var meat_positon
+func _on_area_3d_area_entered(area):
+	if guard2 and area.is_in_group(\"player\") and Global.in_movement and not eatin :
+		colliding_object=area
+		$Audiofollow.play(0.2)
+		guard2=false
+		in_fallow=true
+		if not single and not Global.level_finished:
+			get_parent().trigger(self)
+		single=true
+		$AnimationPlayer.play(\"scale\")
+		velocity.y=5.5
+		$TuxCat/AnimationPlayer.speed_scale=4
+		$TuxCat/AnimationPlayer.play(\"StandUp\")
+		Global.member_dict[cat_id] = self
+
+#		await get_tree().create_timer(1).timeout
+
+	if area.is_in_group(\"barier\") and area.get_parent().color!=cat_color:
+		if Global.speed_var!=2.5:
+			explode()
+		else:
+			for i in 16:
+				var new_enemy = blood_scene.instantiate()
+				$blood_pivot.add_child(new_enemy)
+				new_enemy.global_position.x=area.global_position.x+randf_range(-1,1)
+				new_enemy.global_position.y=area.global_position.y+0.3
+				new_enemy.global_position.z=area.global_position.z
+				new_enemy.blood_count=i
+				new_enemy.blood_color=area.get_parent().color
+			area.get_parent().queue_free()
+	if area.is_in_group(\"wall\"):
+		jump(area)
+		await get_tree().create_timer(0.2).timeout
+		area.position.y+=10
+	if area.is_in_group(\"meat\"):
+		meat_positon=area.get_parent().global_position
+		eatin=true
+		set_collision_mask_value(2,false)
+		set_collision_mask_value(4,false)
+		animation_player.play(\"WalkCycle\")
+		$TuxCat/AnimationPlayer_real2.play(\"hat\")
+	if area.is_in_group(\"final_meat\"):
+		final_eatin=true
+		$TuxCat/AnimationPlayer.stop()
+		$TuxCat/AnimationPlayer_real.play(\"standup\")
+		$TuxCat/AnimationPlayer_real.get_animation(\"standup\").loop_mode=2
+		$TuxCat/AnimationPlayer_real.seek(randf_range(0.0,1.0),true)
+
+		
+func start_movement(body):
+	print('lo')
+	$Audiofollow.play(0.2)
+	guard2=false
+	in_fallow=true
+	if not single:
+		guard2=false
+#		$Area3D.monitoring=false
+		colliding_object=body
+		$AnimationPlayer.play(\"scale\")
+		velocity.y=5.5
+		$TuxCat/AnimationPlayer.speed_scale=4
+		$TuxCat/AnimationPlayer.play(\"StandUp\")
+
+		Global.member_dict[cat_id] = self
+
+func repos_Anim(delta):
+	var fark =colliding_object.global_position-global_position
+	timer+=delta
+	if timer<0.40:
+		position.z-=delta*-30*fark.z
+		if fark.x>0:
+			position.x-=delta/fark.x/45
+		if  fark.x<0:
+			position.x+=delta/fark.x/45*-1
+
+func play_random_animation(animation_player:AnimationPlayer):
+	var animation_list = animation_player.get_animation_list()
+	var random_animation = animation_list[randi() % 2]
+	animation_player.play(random_animation)
+
+func color_update(colour):
+	cat_color=colour
+	$TuxCat/metarig004/Skeleton3D/Cat.get_surface_override_material(3).set_albedo(colour)
+
+#randi()%2
+var bool_guard=true
+var hedef
+var memory
+func final_fight(delta):
+	if bool_guard :
+		self.set_process_input(false)
+		bool_guard=false
+		var passer=global_position
+		animation_player.play(\"WalkCycle\")
+		$TuxCat/AnimationPlayer_real2.play(\"hat\")
+		var force =Global.pos-Vector3(0.75,0,0)
+		hedef=passer-force
+		memory=global_position
+	memory = memory.lerp(hedef, delta * 2.5)
+	global_position.x=memory.x
+	global_position.z=Global.pos.z+random_offsett
+	$TuxCat/AnimationPlayer.speed_scale=1
+	
+func jump(wall):
+	var pro=randi()%(int(Global.member_dict.size()/5)+1)
+	$AnimationPlayer.play(\"smash\")
+	await get_tree().create_timer(0.3).timeout
+	if pro==0 :
+		
+		explode()
+func scale_up(scale_value):
+	$TuxCat/AnimationPlayer_real.get_animation(\"scale\").track_set_key_value(0,2,\\
+	Vector3(scale_value,scale_value,scale_value))
+	$TuxCat/AnimationPlayer_real.get_animation(\"scale\").track_set_key_value(0,0,\\
+	Vector3(scale_value-0.1,scale_value-0.1,scale_value-0.1))
+	$TuxCat/AnimationPlayer_real.play(\"scale\")
+	$TuxCat/AnimationPlayer_real.get_animation(\"scale\").track_set_key_value(0,1,\\
+	Vector3(scale_value+0.4,scale_value+0.4,scale_value+0.4))
+	
+func eating(delta):
+	$TuxCat/AnimationPlayer.speed_scale=1.3
+	if not final_eatin:
+		global_position.z+=(meat_positon.z-global_position.z)*delta*1.6
+		global_position.x+=(meat_positon.x-global_position.x)*delta
+		$TuxCat.rotation_degrees.y=meat_positon.x-global_position.x
+#		print(Vector2($TuxCat.rotation_degrees.y,meat_positon.x-global_position.x))
+	else:
+		pass
+	velocity.z=0
+	
+func in_follow():
+	randomize()
+	guard2=false
+	in_fallow=true
+	if not single and not Global.level_finished:
+		get_parent().trigger(self)
+#			$Area3D.monitoring=false
+	single=true
+	$AnimationPlayer.play(\"scale\")
+	velocity.y=5.5
+	$TuxCat/AnimationPlayer.speed_scale=4
+	$TuxCat/AnimationPlayer.play(\"StandUp\")
+	$Audiofollow.play(0.2)
+	cat_id=randf()
+	Global.member_dict[cat_id] = self
+	
+	colliding_object=get_parent().get_node(\"player\")
+
+func explode():
+	
+	if randi()%2==0:
+		$Audioburst.play()
+	else :
+		$Audioburst2.play()
+	$particles.emitting=true
+	$particles.global_position=global_position
+	$particles.global_position.y+=0.05
+	$particles.get_draw_pass_mesh(0).material.set_albedo(cat_color)
+	Global.member_dict.erase(cat_id)
+	$TuxCat.visible=false
+	self.set_process_input(false)
+	self.set_process(false)
+	print(Global.member_dict.size())
+	if Global.member_dict.size()==0:
+
+		Global.dead=true
+		await get_tree().create_timer(1).timeout
+		get_node(\"/root/Node3D/enviroment/CanvasLayer/smoke2\").visible=false
+		if Global.level_finished:
+			
+			get_node(\"/root/Node3D/enviroment/CanvasLayer/ui\").succes_state()
+#			Global.succes_state()
+		else:
+			get_node(\"/root/Node3D/enviroment/CanvasLayer/ui\").fail_state()
+		get_tree().paused = true
+#		Global.reset_script()
+	
+#		speed=0
+	for i in 16:
+		var new_enemy = blood_scene.instantiate()
+		$blood_pivot.add_child(new_enemy)
+		new_enemy.global_position=global_position
+		new_enemy.global_position.y=global_position.y+0.3
+		new_enemy.global_position.z=global_position.z
+		new_enemy.blood_count=i
+		new_enemy.blood_color=cat_color
+	global_position.x+=100
+#	global_position.y+=100
+#	global_position.z+=100
+	$Area3D.set_collision_mask_value(1,false)
+	$Area3D.set_collision_layer_value(1,false)
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aiyvy"]
+size = Vector3(0.116, 2.264, 0.329)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rd4ep"]
+size = Vector3(0.232, 0.488, 0.817)
+
+[sub_resource type="Animation" id="Animation_5u6js"]
+resource_name = "scale"
+length = 0.4357
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TuxCat")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.052, 0.052, 0.052, 0.2, 1, 0.068, 0.06, 0.068, 0.4332, 1, 0.052, 0.052, 0.052)
+
+[sub_resource type="Animation" id="Animation_nksd5"]
+resource_name = "scale_2"
+length = 0.4357
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TuxCat")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.052, 0.052, 0.052, 0.2, 1, 0.068, 0.06, 0.068, 0.4, 1, 0.052, 0.052, 0.052)
+
+[sub_resource type="Animation" id="Animation_brg2a"]
+resource_name = "smash"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TuxCat:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.507891, 0, 0), Vector3(0.44855, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TuxCat:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.24844, -0.25, 0, 0.25, 0, -0.131, -0.25, 0, 0.25, 0, -0.248, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.6)
+}
+
+[sub_resource type="Animation" id="Animation_ikdx5"]
+resource_name = "smash_2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("TuxCat:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.507891, 0, 0), Vector3(0.44855, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TuxCat:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.24844, -0.25, 0, 0.25, 0, 0.024, -0.25, 0, 0.25, 0, -0.248, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.6)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ouub"]
+_data = {
+"scale": SubResource("Animation_5u6js"),
+"scale_2": SubResource("Animation_nksd5"),
+"smash": SubResource("Animation_brg2a"),
+"smash_2": SubResource("Animation_ikdx5")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cm5gl"]
+size = Vector3(0.438, 1.203, 0.378)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v2to3"]
+emission_shape = 3
+emission_box_extents = Vector3(0.019, 0.019, 0.019)
+direction = Vector3(1, 1, 1)
+spread = 180.0
+gravity = Vector3(0, -4.752, 0)
+initial_velocity_max = 1.0
+angular_velocity_min = 19.99
+angular_velocity_max = 19.99
+scale_min = 0.0
+scale_max = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nob4x"]
+albedo_color = Color(1, 0.529412, 0, 1)
+albedo_texture_force_srgb = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_e48bo"]
+material = SubResource("StandardMaterial3D_nob4x")
+radius = 0.3
+height = 0.6
+
+[node name="cat_pack" type="CharacterBody3D" groups=["player"]]
+editor_description = "		await get_tree().create_timer(1).timeout"
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.00481713, 0, 0)
+collision_layer = 2
+collision_mask = 14
+script = SubResource("GDScript_5f5w3")
+gravity = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.724915, 0.0567288)
+shape = SubResource("BoxShape3D_aiyvy")
+
+[node name="Area3D" type="Area3D" parent="." groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529096, -0.224543)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00610848, -0.665393, 0.132451)
+shape = SubResource("BoxShape3D_rd4ep")
+
+[node name="TuxCat" parent="." instance=ExtResource("1_ec3hs")]
+transform = Transform3D(0.052, 0, 0, 0, 0.052, 0, 0, 0, 0.052, 0, -0.24844, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2ouub")
+}
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="final_collision" type="CollisionShape3D" parent="StaticBody3D" groups=["player"]]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0.66026, 0.0567288)
+visible = false
+shape = SubResource("BoxShape3D_cm5gl")
+
+[node name="particle timer" type="Timer" parent="."]
+
+[node name="particles" type="GPUParticles3D" parent="."]
+top_level = true
+emitting = false
+amount = 200
+lifetime = 0.53
+one_shot = true
+speed_scale = 1.31
+explosiveness = 1.0
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_v2to3")
+draw_pass_1 = SubResource("SphereMesh_e48bo")
+
+[node name="GPUParticlesCollisionSphere3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(2.252, 0, 0, 0, 0.069, 0, 0, 0, 2.309, -0.0426033, -0.131098, 0)
+visible = false
+
+[node name="dead_sfx" type="AudioStreamPlayer3D" parent="."]
+visible = false
+stream = ExtResource("2_tjtav")
+
+[node name="ray" type="RayCast3D" parent="."]
+collision_mask = 4
+script = ExtResource("3_mdvon")
+
+[node name="blood_pivot" type="Node" parent="."]
+
+[node name="Cameram" type="Camera3D" parent="."]
+transform = Transform3D(-0.999387, -0.0106332, -0.0333448, -0.025769, 0.868249, 0.495458, 0.0236833, 0.496014, -0.867991, 0.071, 5.697, -9.92)
+current = true
+fov = 53.8
+
+[node name="Audiofollow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_swkmm")
+volume_db = 3.1
+
+[node name="Audioburst" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0bbe6")
+
+[node name="Audioburst2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_maard")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

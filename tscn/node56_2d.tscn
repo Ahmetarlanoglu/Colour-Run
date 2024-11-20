@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpmc5wpcy48mk"]
+
+[ext_resource type="Script" path="res://assets/tscn/Nodedsaf2D.gd" id="1_72kg3"]
+[ext_resource type="Texture2D" uid="uid://ccds71twes2f2" path="res://assets/sprites/characters/chr_pawn_skeleton_mage.png" id="2_gbcgt"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vj27f"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 598, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+collision_mode = 1
+collision_friction = 0.2
+collision_bounce = 0.53
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj0cb"]
+size = Vector2(347, 179)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yfh1m"]
+polygon = PackedVector2Array(193, 215, -17, 193, -77, 190, -145, 218)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_72kg3")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(272, -42)
+process_material = SubResource("ParticleProcessMaterial_vj27f")
+texture = ExtResource("2_gbcgt")
+lifetime = 4.13
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(109, 535)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(26, 141)
+shape = SubResource("RectangleShape2D_rj0cb")
+
+[node name="ChrPawnSkeletonMage" type="Sprite2D" parent="."]
+position = Vector2(281, 302)
+texture = ExtResource("2_gbcgt")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(368, 139)
+occluder = SubResource("OccluderPolygon2D_yfh1m")

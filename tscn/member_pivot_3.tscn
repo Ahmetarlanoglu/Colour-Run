@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://dktrjnb4d400m"]
+
+[ext_resource type="PackedScene" uid="uid://6uxi7yduqwei" path="res://assets/tscn/cat_pack.tscn" id="2_v6u3u"]
+
+[sub_resource type="GDScript" id="GDScript_efp5k"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+
+
+func trigger(body):
+	if body!=$cat_pack3:
+		$cat_pack3.start_movement(body) 
+	if body!=$cat_pack4:
+		$cat_pack4.start_movement(body) 
+	if body!=$cat_pack5:
+		$cat_pack5.start_movement(body) 
+	if body!=$cat_pack6:
+		$cat_pack6.start_movement(body) 
+	if body!=$cat_pack7:
+		$cat_pack7.start_movement(body) 
+"
+
+[node name="member_pivot" type="Node3D"]
+script = SubResource("GDScript_efp5k")
+
+[node name="cat_pack5" parent="." instance=ExtResource("2_v6u3u")]
+
+[node name="cat_pack4" parent="." instance=ExtResource("2_v6u3u")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, -0.28916, 0, 0.273152)
+
+[node name="cat_pack3" parent="." instance=ExtResource("2_v6u3u")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.297566, 0, 0.275706)
+
+[node name="cat_pack6" parent="." instance=ExtResource("2_v6u3u")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, 0.592492, 0, -0.00119802)
+
+[node name="cat_pack7" parent="." instance=ExtResource("2_v6u3u")]
+transform = Transform3D(1.174, 0, 0, 0, 1.174, 0, 0, 0, 1.174, -0.587142, 0, -0.00119802)

@@ -1,0 +1,203 @@
+[gd_scene load_steps=14 format=3 uid="uid://cufjvprmycird"]
+
+[ext_resource type="ArrayMesh" uid="uid://cw1ufuf1lw6h4" path="res://assets/tres/screw.tres" id="3_w0ntb"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_03xgy"]
+rough = true
+
+[sub_resource type="GDScript" id="GDScript_tle7h"]
+script/source = "extends StaticBody3D
+@export var time=randf_range(0,3)
+var shit_guard=true
+
+
+
+@export var color:Color
+func _ready():
+	pass # Replace with function body.
+	$AnimationPlayer.play(\"zort\")
+#	$area_left.color=color
+#	$area_right.color=color
+#	$AnimationPlayer.get_animation(\"zort\").set_loop_mode(true)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	time+=delta
+	if time>3 and shit_guard:
+		shit_guard=false
+		$AnimationPlayer.play_backwards(\"zort\")
+	if time>5:
+		$AnimationPlayer.play(\"zort\")
+		time-=5
+		shit_guard=true
+
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wu88i"]
+size = Vector3(0.202, 1.094, 0.745)
+
+[sub_resource type="Animation" id="Animation_vnaip"]
+resource_name = "zort"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("area_right:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.14527, -0.266098, -0.0285644), Vector3(3.036, -0.266098, -0.0285644)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("area_left:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.555829, -0.266098, -0.0285644), Vector3(-1.414, -0.266, -0.029)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("area_left/MeshInstance3D3/skrew3:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 4.36332, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("area_right/MeshInstance3D2/skrew1:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 4.36332, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6mo1"]
+_data = {
+"zort": SubResource("Animation_vnaip")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7n43"]
+albedo_color = Color(0.490196, 0.00392157, 0.937255, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mrb4e"]
+material = SubResource("StandardMaterial3D_m7n43")
+
+[sub_resource type="GDScript" id="GDScript_mill5"]
+script/source = "extends Area3D
+
+var color
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_7qlwk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kglq5"]
+albedo_color = Color(0.490196, 0.00392157, 0.937255, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fmu8g"]
+size = Vector3(1.918, 0.914, 0.78)
+
+[sub_resource type="GDScript" id="GDScript_5nxgj"]
+script/source = "extends Area3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="screw_barier" type="StaticBody3D" groups=["barierr"]]
+process_mode = 3
+transform = Transform3D(0.768, 0, 0, 0, 0.768, 0, 0, 0, 0.768, 0, 0, 0)
+collision_layer = 0
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_03xgy")
+script = SubResource("GDScript_tle7h")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.934, 0, 0, 0, 0.934, 0, 0, 0, 0.934, 0, 1.63444, 0)
+shape = SubResource("BoxShape3D_wu88i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g6mo1")
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+editor_description = "7d01ef
+"
+transform = Transform3D(-0.00872653, 0, -0.999962, 0, 0.932819, 0, 0.999962, 0, -0.00872653, 0, 0.000583369, 0)
+mesh = SubResource("BoxMesh_mrb4e")
+
+[node name="area_right" type="Area3D" parent="." groups=["barier"]]
+transform = Transform3D(1, 4.62593e-15, 0, -4.62593e-15, 1, -2.79388e-28, 4.41163e-21, -3.9443e-28, 1, 2.14527, -0.266098, -0.0285644)
+script = SubResource("GDScript_mill5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="area_right"]
+transform = Transform3D(-3.19945e-08, -0.348851, 6.75016e-14, 0.73195, -1.52488e-08, -1.72428e-22, 1.16467e-21, 1.95399e-14, 0.801703, -1.42092, 0.275371, 0.0285644)
+mesh = SubResource("BoxMesh_7qlwk")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kglq5")
+
+[node name="skrew1" type="MeshInstance3D" parent="area_right/MeshInstance3D2"]
+transform = Transform3D(0.296167, 0, 0, 0, 1.78045, 0, 0, 0, 0.265194, -0.0213504, 1.83785, -0.00126616)
+mesh = ExtResource("3_w0ntb")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="area_right"]
+transform = Transform3D(0.934, 4.0826e-08, -4.06469e-08, -4.0826e-08, 0.00410789, -0.933991, -4.06469e-08, 0.933991, 0.00410789, -2.12465, 0.266516, -0.00321024)
+shape = SubResource("BoxShape3D_fmu8g")
+
+[node name="area_left" type="Area3D" parent="." groups=["barier"]]
+transform = Transform3D(1, 4.62593e-15, 0, -9.25186e-15, 1, -5.42342e-28, 1.32349e-20, -7.88861e-28, 1, -0.555829, -0.266098, -0.0285644)
+script = SubResource("GDScript_5nxgj")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="area_left"]
+transform = Transform3D(8.72842e-09, 0.348851, -5.32907e-14, -0.73195, 4.16002e-09, 2.05962e-21, 5.29395e-22, 1.06581e-14, 0.801703, -0.18021, 0.244116, 0.0285644)
+mesh = SubResource("BoxMesh_7qlwk")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kglq5")
+
+[node name="skrew2" type="MeshInstance3D" parent="area_left/MeshInstance3D3"]
+transform = Transform3D(0.296167, 0, 9.66147e-22, 8.88178e-16, 2.35014, 4.26326e-14, -1.85288e-22, -2.84217e-14, 0.265194, -0.0213504, 2.39729, -0.00126616)
+top_level = true
+visible = false
+mesh = ExtResource("3_w0ntb")
+skeleton = NodePath("../../..")
+
+[node name="skrew3" type="MeshInstance3D" parent="area_left/MeshInstance3D3"]
+transform = Transform3D(0.296167, 0, 0, 0, 1.78045, 0, 0, 0, 0.265194, -0.0213504, 1.89731, -0.00126616)
+mesh = ExtResource("3_w0ntb")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="area_left"]
+transform = Transform3D(0.934, 4.0826e-08, -4.06469e-08, -4.0826e-08, 0.00410789, -0.933991, -4.06469e-08, 0.933991, 0.00410789, 0.585773, 0.266516, 0.000533365)
+shape = SubResource("BoxShape3D_fmu8g")

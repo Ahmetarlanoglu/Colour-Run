@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhkou4n5q8ual"]
+
+[ext_resource type="PackedScene" uid="uid://fp2h8ysppfub" path="res://assets/Low_Poly_Forest_Pack_Devilswork.Shop_v02/DAE/Low_Poly_Forest_treeRoundTop08Snow.dae" id="1_lbjtx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17dh1"]
+albedo_color = Color(0.372549, 0.686275, 0.894118, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evo21"]
+albedo_color = Color(0.372549, 0.686275, 0.894118, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_weum6"]
+material = SubResource("StandardMaterial3D_evo21")
+
+[node name="Low_Poly_Forest_treeRoundTop08Snow" instance=ExtResource("1_lbjtx")]
+
+[node name="leaf" parent="treeRoundTop08Snow" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_17dh1")
+
+[node name="leaf_2" parent="treeRoundTop08Snow" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_17dh1")
+
+[node name="bark" parent="treeRoundTop08Snow" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_17dh1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+visible = false
+mesh = SubResource("PlaneMesh_weum6")
