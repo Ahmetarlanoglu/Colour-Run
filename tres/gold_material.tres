@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ctqq5xipkdtmv"]
+
+[ext_resource type="Texture2D" uid="uid://dbocjx8tvc627" path="res://assets/collectables/textures/Gold_baseColor.png" id="1_xwk6s"]
+[ext_resource type="Texture2D" uid="uid://bbh6i5furndnj" path="res://assets/collectables/textures/Gold_normal.png" id="3_wyjq1"]
+
+[resource]
+albedo_color = Color(0.768627, 0.701961, 0.678431, 1)
+albedo_texture = ExtResource("1_xwk6s")
+normal_texture = ExtResource("3_wyjq1")

@@ -1,0 +1,13 @@
+[gd_resource type="Shader" format=3 uid="uid://d2bovgeogdk74"]
+
+[resource]
+code = "shader_type canvas_item;
+uniform vec4 adding_color:source_color;
+
+void fragment() {
+	COLOR=vec4(adding_color.xyz,0.5-(UV.y*UV.y));
+	
+
+	// Place fragment code here.
+}
+"
